@@ -1,0 +1,2750 @@
+{
+  "version": "0.1.0",
+  "generated": "2026-10-24",
+  "units": "cm",
+  "protocol": {
+    "chest_half": "Ширина по груди: изделие плоско, от подмышки до подмышки (2,5 см ниже проймы) = половина обхвата.",
+    "length_back": "Длина по спинке: от высшей точки плеча у горловины (HPS) до низа.",
+    "sleeve_cb": "Рукав от центра спинки: середина горловины сзади → точка плеча → край манжеты. Одинаково для втачного, спущенного плеча и реглана.",
+    "shoulder": "Плечи от шва до шва. null для реглана; для спущенного плеча — только справочно."
+  },
+  "confidence_levels": {
+    "verified": "Обмеры изделия из официальной спецификации или страницы товара.",
+    "partial": "Часть полей/размеров официальная, остальные — оценка (estimated_fields).",
+    "estimated": "Оценка по типичному крою и градации. Не показывать как факт.",
+    "placeholder": "Временные данные собственного товара."
+  },
+  "product": {
+    "id": "aura-heavyweight-hoodie",
+    "brand": "AURA STUDIO",
+    "model": "Heavyweight Fleece Hoodie",
+    "category": "hoodie",
+    "gender": "unisex",
+    "fit": "oversize",
+    "shoulder_type": "drop",
+    "confidence": "placeholder",
+    "note": "ЗАГЛУШКА: заменить реальными лекалами. M согласован с текущей вёрсткой (длина 71, плечи 55.5, рукав от шва 66).",
+    "sizes": {
+      "XS": {
+        "ru": "44",
+        "chest_half": 56,
+        "length_back": 67,
+        "sleeve_cb": 89.5,
+        "sleeve_from_shoulder": 64,
+        "shoulder": 51.5,
+        "in_stock": true
+      },
+      "S": {
+        "ru": "46",
+        "chest_half": 59,
+        "length_back": 69,
+        "sleeve_cb": 91.5,
+        "sleeve_from_shoulder": 65,
+        "shoulder": 53.5,
+        "in_stock": true
+      },
+      "M": {
+        "ru": "48",
+        "chest_half": 62,
+        "length_back": 71,
+        "sleeve_cb": 93.5,
+        "sleeve_from_shoulder": 66,
+        "shoulder": 55.5,
+        "in_stock": true
+      },
+      "L": {
+        "ru": "50",
+        "chest_half": 65,
+        "length_back": 73,
+        "sleeve_cb": 95.5,
+        "sleeve_from_shoulder": 67,
+        "shoulder": 57.5,
+        "in_stock": true
+      },
+      "XL": {
+        "ru": "52",
+        "chest_half": 68,
+        "length_back": 75,
+        "sleeve_cb": 97.5,
+        "sleeve_from_shoulder": 68,
+        "shoulder": 59.5,
+        "in_stock": false
+      }
+    }
+  },
+  "garments": [
+    {
+      "id": "nike-club-fleece-crew",
+      "brand": "Nike",
+      "model": "Club Fleece Crew (CJ1614)",
+      "category": "sweatshirt",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "raglan",
+      "fabric": "80% хлопок / 20% полиэстер, флис 8.2 oz",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "verified",
+      "estimated_fields": [],
+      "source": "https://assets.dc-onesource.com/3/f/3fc830c42ae73223090b9177762682d2.pdf",
+      "note": "Спецификация корпоративной (B2B) линейки Nike; розничная версия может отличаться на 1–2 см.",
+      "sizes": {
+        "S": {
+          "ru": "46",
+          "chest_half": 54.9,
+          "length_back": 67.6,
+          "sleeve_cb": 88.6,
+          "shoulder": null
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 59.1,
+          "length_back": 69.2,
+          "sleeve_cb": 90.2,
+          "shoulder": null
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 62.9,
+          "length_back": 71.1,
+          "sleeve_cb": 91.4,
+          "shoulder": null
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 67.9,
+          "length_back": 73.0,
+          "sleeve_cb": 93.0,
+          "shoulder": null
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 73.0,
+          "length_back": 75.2,
+          "sleeve_cb": 94.9,
+          "shoulder": null
+        },
+        "3XL": {
+          "ru": "56",
+          "chest_half": 78.1,
+          "length_back": 76.8,
+          "sleeve_cb": 96.8,
+          "shoulder": null
+        }
+      }
+    },
+    {
+      "id": "nike-club-fleece-fullzip",
+      "brand": "Nike",
+      "model": "Club Fleece Full-Zip Hoodie (NKDR1513)",
+      "category": "zip_hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "raglan",
+      "fabric": "80% хлопок / 20% полиэстер, флис 8.2 oz",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "verified",
+      "estimated_fields": [],
+      "source": "https://assets.dc-onesource.com/4/2/4244f726f9af14fab3fb14cbb65675fb.pdf",
+      "note": "Спецификация корпоративной (B2B) линейки Nike; розничная версия может отличаться на 1–2 см.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 50.8,
+          "length_back": 67.0,
+          "sleeve_cb": 87.0,
+          "shoulder": null
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 54.6,
+          "length_back": 67.9,
+          "sleeve_cb": 88.6,
+          "shoulder": null
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 59.1,
+          "length_back": 68.9,
+          "sleeve_cb": 90.2,
+          "shoulder": null
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 62.9,
+          "length_back": 71.1,
+          "sleeve_cb": 91.1,
+          "shoulder": null
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 67.9,
+          "length_back": 73.0,
+          "sleeve_cb": 93.0,
+          "shoulder": null
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 73.0,
+          "length_back": 74.9,
+          "sleeve_cb": 94.9,
+          "shoulder": null
+        }
+      }
+    },
+    {
+      "id": "hm-relaxed-hoodie",
+      "brand": "H&M",
+      "model": "Relaxed Fit Hoodie",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "relaxed",
+      "shoulder_type": "drop",
+      "fabric": "60% хлопок / 40% полиэстер",
+      "availability": "маркетплейсы, б/у",
+      "confidence": "partial",
+      "estimated_fields": [
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": "https://www2.hm.com/en_in/productpage.1074307003.html",
+      "note": "Ширина и длина — с официальной страницы (обхват переведён в полуобхват). Рукав и плечи — оценка.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 52,
+          "length_back": 68,
+          "sleeve_cb": 85.0,
+          "shoulder": 48.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 56,
+          "length_back": 70,
+          "sleeve_cb": 86.0,
+          "shoulder": 50.0
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 60,
+          "length_back": 71,
+          "sleeve_cb": 87.0,
+          "shoulder": 52.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 64,
+          "length_back": 73,
+          "sleeve_cb": 88.0,
+          "shoulder": 54.0
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 68,
+          "length_back": 74,
+          "sleeve_cb": 89.0,
+          "shoulder": 56.0
+        }
+      }
+    },
+    {
+      "id": "hm-oversized-hoodie",
+      "brand": "H&M",
+      "model": "Oversized Hoodie (Divided Basics)",
+      "category": "hoodie",
+      "gender": "unisex",
+      "fit": "oversize",
+      "shoulder_type": "drop",
+      "fabric": "62% хлопок / 38% полиэстер",
+      "availability": "маркетплейсы, б/у",
+      "confidence": "partial",
+      "estimated_fields": [
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": "https://www2.hm.com/en_in/productpage.1087261001.html",
+      "note": "Ширина и длина — с официальной страницы. Рукав и плечи — оценка.",
+      "sizes": {
+        "XXS": {
+          "ru": "42",
+          "chest_half": 53,
+          "length_back": 63,
+          "sleeve_cb": 83.0,
+          "shoulder": 51.0
+        },
+        "XS": {
+          "ru": "44",
+          "chest_half": 55,
+          "length_back": 64,
+          "sleeve_cb": 84.0,
+          "shoulder": 53.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 59,
+          "length_back": 66,
+          "sleeve_cb": 85.0,
+          "shoulder": 55.0
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 63,
+          "length_back": 67,
+          "sleeve_cb": 86.0,
+          "shoulder": 57.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 67,
+          "length_back": 69,
+          "sleeve_cb": 87.0,
+          "shoulder": 59.0
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 71,
+          "length_back": 71,
+          "sleeve_cb": 88.0,
+          "shoulder": 61.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 75,
+          "length_back": 73,
+          "sleeve_cb": 89.0,
+          "shoulder": 63.0
+        }
+      }
+    },
+    {
+      "id": "adidas-ess-ft-3s-fullzip",
+      "brand": "adidas",
+      "model": "Essentials French Terry 3-Stripes Full-Zip Hoodie",
+      "category": "zip_hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "70% хлопок / 30% полиэстер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "partial",
+      "estimated_fields": [
+        "sleeve_cb",
+        "shoulder",
+        "все размеры кроме M"
+      ],
+      "source": "https://www.walmart.com/ip/498289748",
+      "note": "Подтверждены только длина и ширина для M; остальное получено градацией.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 49.9,
+          "length_back": 68.1,
+          "sleeve_cb": 85.0,
+          "shoulder": 44.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 52.9,
+          "length_back": 69.6,
+          "sleeve_cb": 86.5,
+          "shoulder": 45.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 55.9,
+          "length_back": 71.1,
+          "sleeve_cb": 88.0,
+          "shoulder": 47.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 58.9,
+          "length_back": 72.6,
+          "sleeve_cb": 89.5,
+          "shoulder": 48.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 61.9,
+          "length_back": 74.1,
+          "sleeve_cb": 91.0,
+          "shoulder": 50.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 64.9,
+          "length_back": 75.6,
+          "sleeve_cb": 92.5,
+          "shoulder": 51.5
+        }
+      }
+    },
+    {
+      "id": "gj-hoodie-basic",
+      "brand": "Gloria Jeans",
+      "model": "Худи базовое",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "relaxed",
+      "shoulder_type": "drop",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "офлайн-магазины и сайт бренда",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Бренд в топ-20 любимых брендов россиян (OMI, 2025); по отзывам большемерит. Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "42-44",
+          "chest_half": 54,
+          "length_back": 67.0,
+          "sleeve_cb": 85.0,
+          "shoulder": 49.0
+        },
+        "S": {
+          "ru": "44-46",
+          "chest_half": 57,
+          "length_back": 68.5,
+          "sleeve_cb": 86.5,
+          "shoulder": 50.5
+        },
+        "M": {
+          "ru": "48-50",
+          "chest_half": 60,
+          "length_back": 70.0,
+          "sleeve_cb": 88.0,
+          "shoulder": 52.0
+        },
+        "L": {
+          "ru": "50-52",
+          "chest_half": 63,
+          "length_back": 71.5,
+          "sleeve_cb": 89.5,
+          "shoulder": 53.5
+        },
+        "XL": {
+          "ru": "52-54",
+          "chest_half": 66,
+          "length_back": 73.0,
+          "sleeve_cb": 91.0,
+          "shoulder": 55.0
+        },
+        "XXL": {
+          "ru": "54-56",
+          "chest_half": 69,
+          "length_back": 74.5,
+          "sleeve_cb": 92.5,
+          "shoulder": 56.5
+        }
+      }
+    },
+    {
+      "id": "gj-hoodie-oversize",
+      "brand": "Gloria Jeans",
+      "model": "Худи оверсайз",
+      "category": "hoodie",
+      "gender": "unisex",
+      "fit": "oversize",
+      "shoulder_type": "drop",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "офлайн-магазины и сайт бренда",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "42-44",
+          "chest_half": 58,
+          "length_back": 66.0,
+          "sleeve_cb": 86.0,
+          "shoulder": 53.0
+        },
+        "S": {
+          "ru": "44-46",
+          "chest_half": 61,
+          "length_back": 67.5,
+          "sleeve_cb": 87.0,
+          "shoulder": 55.0
+        },
+        "M": {
+          "ru": "48-50",
+          "chest_half": 64,
+          "length_back": 69.0,
+          "sleeve_cb": 88.0,
+          "shoulder": 57.0
+        },
+        "L": {
+          "ru": "50-52",
+          "chest_half": 67,
+          "length_back": 70.5,
+          "sleeve_cb": 89.0,
+          "shoulder": 59.0
+        },
+        "XL": {
+          "ru": "52-54",
+          "chest_half": 70,
+          "length_back": 72.0,
+          "sleeve_cb": 90.0,
+          "shoulder": 61.0
+        },
+        "XXL": {
+          "ru": "54-56",
+          "chest_half": 73,
+          "length_back": 73.5,
+          "sleeve_cb": 91.0,
+          "shoulder": 63.0
+        }
+      }
+    },
+    {
+      "id": "gj-sweatshirt",
+      "brand": "Gloria Jeans",
+      "model": "Свитшот базовый",
+      "category": "sweatshirt",
+      "gender": "men",
+      "fit": "relaxed",
+      "shoulder_type": "drop",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "офлайн-магазины и сайт бренда",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "42-44",
+          "chest_half": 53,
+          "length_back": 65.0,
+          "sleeve_cb": 85.0,
+          "shoulder": 48.0
+        },
+        "S": {
+          "ru": "44-46",
+          "chest_half": 56,
+          "length_back": 66.5,
+          "sleeve_cb": 86.5,
+          "shoulder": 49.5
+        },
+        "M": {
+          "ru": "48-50",
+          "chest_half": 59,
+          "length_back": 68.0,
+          "sleeve_cb": 88.0,
+          "shoulder": 51.0
+        },
+        "L": {
+          "ru": "50-52",
+          "chest_half": 62,
+          "length_back": 69.5,
+          "sleeve_cb": 89.5,
+          "shoulder": 52.5
+        },
+        "XL": {
+          "ru": "52-54",
+          "chest_half": 65,
+          "length_back": 71.0,
+          "sleeve_cb": 91.0,
+          "shoulder": 54.0
+        },
+        "XXL": {
+          "ru": "54-56",
+          "chest_half": 68,
+          "length_back": 72.5,
+          "sleeve_cb": 92.5,
+          "shoulder": 55.5
+        }
+      }
+    },
+    {
+      "id": "gj-jumper",
+      "brand": "Gloria Jeans",
+      "model": "Джемпер трикотажный",
+      "category": "sweater",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "вязаный трикотаж",
+      "availability": "офлайн-магазины и сайт бренда",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "42-44",
+          "chest_half": 50.0,
+          "length_back": 65.0,
+          "sleeve_cb": 81.0,
+          "shoulder": 43.0
+        },
+        "S": {
+          "ru": "44-46",
+          "chest_half": 52.5,
+          "length_back": 66.5,
+          "sleeve_cb": 82.5,
+          "shoulder": 44.5
+        },
+        "M": {
+          "ru": "48-50",
+          "chest_half": 55.0,
+          "length_back": 68.0,
+          "sleeve_cb": 84.0,
+          "shoulder": 46.0
+        },
+        "L": {
+          "ru": "50-52",
+          "chest_half": 57.5,
+          "length_back": 69.5,
+          "sleeve_cb": 85.5,
+          "shoulder": 47.5
+        },
+        "XL": {
+          "ru": "52-54",
+          "chest_half": 60.0,
+          "length_back": 71.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 49.0
+        },
+        "XXL": {
+          "ru": "54-56",
+          "chest_half": 62.5,
+          "length_back": 72.5,
+          "sleeve_cb": 88.5,
+          "shoulder": 50.5
+        }
+      }
+    },
+    {
+      "id": "ostin-hoodie",
+      "brand": "O'STIN",
+      "model": "Худи базовое",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "офлайн-магазины и сайт бренда",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 51,
+          "length_back": 67.0,
+          "sleeve_cb": 83.0,
+          "shoulder": 45.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 54,
+          "length_back": 68.5,
+          "sleeve_cb": 84.5,
+          "shoulder": 46.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 57,
+          "length_back": 70.0,
+          "sleeve_cb": 86.0,
+          "shoulder": 48.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 60,
+          "length_back": 71.5,
+          "sleeve_cb": 87.5,
+          "shoulder": 49.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 63,
+          "length_back": 73.0,
+          "sleeve_cb": 89.0,
+          "shoulder": 51.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 66,
+          "length_back": 74.5,
+          "sleeve_cb": 90.5,
+          "shoulder": 52.5
+        }
+      }
+    },
+    {
+      "id": "ostin-sweatshirt",
+      "brand": "O'STIN",
+      "model": "Свитшот базовый",
+      "category": "sweatshirt",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "офлайн-магазины и сайт бренда",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 50,
+          "length_back": 65.0,
+          "sleeve_cb": 83.0,
+          "shoulder": 44.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 53,
+          "length_back": 66.5,
+          "sleeve_cb": 84.5,
+          "shoulder": 45.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 56,
+          "length_back": 68.0,
+          "sleeve_cb": 86.0,
+          "shoulder": 47.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 59,
+          "length_back": 69.5,
+          "sleeve_cb": 87.5,
+          "shoulder": 48.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 62,
+          "length_back": 71.0,
+          "sleeve_cb": 89.0,
+          "shoulder": 50.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 65,
+          "length_back": 72.5,
+          "sleeve_cb": 90.5,
+          "shoulder": 51.5
+        }
+      }
+    },
+    {
+      "id": "ostin-sweater",
+      "brand": "O'STIN",
+      "model": "Свитер вязаный",
+      "category": "sweater",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "вязаный трикотаж",
+      "availability": "офлайн-магазины и сайт бренда",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 50.0,
+          "length_back": 65.0,
+          "sleeve_cb": 81.0,
+          "shoulder": 43.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 52.5,
+          "length_back": 66.5,
+          "sleeve_cb": 82.5,
+          "shoulder": 44.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 55.0,
+          "length_back": 68.0,
+          "sleeve_cb": 84.0,
+          "shoulder": 46.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 57.5,
+          "length_back": 69.5,
+          "sleeve_cb": 85.5,
+          "shoulder": 47.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 60.0,
+          "length_back": 71.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 49.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 62.5,
+          "length_back": 72.5,
+          "sleeve_cb": 88.5,
+          "shoulder": 50.5
+        }
+      }
+    },
+    {
+      "id": "befree-hoodie-oversize",
+      "brand": "Befree",
+      "model": "Худи оверсайз",
+      "category": "hoodie",
+      "gender": "unisex",
+      "fit": "oversize",
+      "shoulder_type": "drop",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "офлайн-магазины и сайт бренда",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 57,
+          "length_back": 66.0,
+          "sleeve_cb": 85.0,
+          "shoulder": 52.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 60,
+          "length_back": 67.5,
+          "sleeve_cb": 86.0,
+          "shoulder": 54.0
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 63,
+          "length_back": 69.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 56.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 66,
+          "length_back": 70.5,
+          "sleeve_cb": 88.0,
+          "shoulder": 58.0
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 69,
+          "length_back": 72.0,
+          "sleeve_cb": 89.0,
+          "shoulder": 60.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 72,
+          "length_back": 73.5,
+          "sleeve_cb": 90.0,
+          "shoulder": 62.0
+        }
+      }
+    },
+    {
+      "id": "sela-hoodie",
+      "brand": "Sela",
+      "model": "Худи базовое",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "офлайн-магазины и сайт бренда",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 51,
+          "length_back": 66.0,
+          "sleeve_cb": 82.0,
+          "shoulder": 45.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 54,
+          "length_back": 67.5,
+          "sleeve_cb": 83.5,
+          "shoulder": 46.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 57,
+          "length_back": 69.0,
+          "sleeve_cb": 85.0,
+          "shoulder": 48.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 60,
+          "length_back": 70.5,
+          "sleeve_cb": 86.5,
+          "shoulder": 49.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 63,
+          "length_back": 72.0,
+          "sleeve_cb": 88.0,
+          "shoulder": 51.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 66,
+          "length_back": 73.5,
+          "sleeve_cb": 89.5,
+          "shoulder": 52.5
+        }
+      }
+    },
+    {
+      "id": "maag-hoodie-oversize",
+      "brand": "MAAG (ex-Zara)",
+      "model": "Худи оверсайз",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "oversize",
+      "shoulder_type": "drop",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "офлайн-магазины и сайт бренда",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 57,
+          "length_back": 68.0,
+          "sleeve_cb": 86.0,
+          "shoulder": 52.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 60,
+          "length_back": 69.5,
+          "sleeve_cb": 87.0,
+          "shoulder": 54.0
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 63,
+          "length_back": 71.0,
+          "sleeve_cb": 88.0,
+          "shoulder": 56.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 66,
+          "length_back": 72.5,
+          "sleeve_cb": 89.0,
+          "shoulder": 58.0
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 69,
+          "length_back": 74.0,
+          "sleeve_cb": 90.0,
+          "shoulder": 60.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 72,
+          "length_back": 75.5,
+          "sleeve_cb": 91.0,
+          "shoulder": 62.0
+        }
+      }
+    },
+    {
+      "id": "dub-hoodie",
+      "brand": "DUB (ex-Pull&Bear)",
+      "model": "Худи базовое",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "relaxed",
+      "shoulder_type": "drop",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "офлайн-магазины и сайт бренда",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 55,
+          "length_back": 67.0,
+          "sleeve_cb": 85.0,
+          "shoulder": 50.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 58,
+          "length_back": 68.5,
+          "sleeve_cb": 86.5,
+          "shoulder": 51.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 61,
+          "length_back": 70.0,
+          "sleeve_cb": 88.0,
+          "shoulder": 53.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 64,
+          "length_back": 71.5,
+          "sleeve_cb": 89.5,
+          "shoulder": 54.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 67,
+          "length_back": 73.0,
+          "sleeve_cb": 91.0,
+          "shoulder": 56.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 70,
+          "length_back": 74.5,
+          "sleeve_cb": 92.5,
+          "shoulder": 57.5
+        }
+      }
+    },
+    {
+      "id": "ecru-hoodie-boxy",
+      "brand": "ECRU (ex-Bershka)",
+      "model": "Худи boxy",
+      "category": "hoodie",
+      "gender": "unisex",
+      "fit": "oversize",
+      "shoulder_type": "drop",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "офлайн-магазины и сайт бренда",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 58,
+          "length_back": 63.0,
+          "sleeve_cb": 84.0,
+          "shoulder": 54.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 61,
+          "length_back": 64.5,
+          "sleeve_cb": 85.0,
+          "shoulder": 56.0
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 64,
+          "length_back": 66.0,
+          "sleeve_cb": 86.0,
+          "shoulder": 58.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 67,
+          "length_back": 67.5,
+          "sleeve_cb": 87.0,
+          "shoulder": 60.0
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 70,
+          "length_back": 69.0,
+          "sleeve_cb": 88.0,
+          "shoulder": 62.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 73,
+          "length_back": 70.5,
+          "sleeve_cb": 89.0,
+          "shoulder": 64.0
+        }
+      }
+    },
+    {
+      "id": "demix-hoodie",
+      "brand": "Demix",
+      "model": "Худи мужское",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "Спортмастер, маркетплейсы",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 51,
+          "length_back": 68.0,
+          "sleeve_cb": 84.0,
+          "shoulder": 45.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 54,
+          "length_back": 69.5,
+          "sleeve_cb": 85.5,
+          "shoulder": 46.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 57,
+          "length_back": 71.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 48.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 60,
+          "length_back": 72.5,
+          "sleeve_cb": 88.5,
+          "shoulder": 49.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 63,
+          "length_back": 74.0,
+          "sleeve_cb": 90.0,
+          "shoulder": 51.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 66,
+          "length_back": 75.5,
+          "sleeve_cb": 91.5,
+          "shoulder": 52.5
+        }
+      }
+    },
+    {
+      "id": "demix-sweatshirt",
+      "brand": "Demix",
+      "model": "Свитшот мужской",
+      "category": "sweatshirt",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "Спортмастер, маркетплейсы",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 50,
+          "length_back": 66.0,
+          "sleeve_cb": 84.0,
+          "shoulder": 44.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 53,
+          "length_back": 67.5,
+          "sleeve_cb": 85.5,
+          "shoulder": 45.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 56,
+          "length_back": 69.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 47.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 59,
+          "length_back": 70.5,
+          "sleeve_cb": 88.5,
+          "shoulder": 48.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 62,
+          "length_back": 72.0,
+          "sleeve_cb": 90.0,
+          "shoulder": 50.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 65,
+          "length_back": 73.5,
+          "sleeve_cb": 91.5,
+          "shoulder": 51.5
+        }
+      }
+    },
+    {
+      "id": "termit-hoodie",
+      "brand": "Termit",
+      "model": "Худи мужское",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "Спортмастер, маркетплейсы",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 52,
+          "length_back": 68.0,
+          "sleeve_cb": 84.0,
+          "shoulder": 45.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 55,
+          "length_back": 69.5,
+          "sleeve_cb": 85.5,
+          "shoulder": 46.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 58,
+          "length_back": 71.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 48.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 61,
+          "length_back": 72.5,
+          "sleeve_cb": 88.5,
+          "shoulder": 49.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 64,
+          "length_back": 74.0,
+          "sleeve_cb": 90.0,
+          "shoulder": 51.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 67,
+          "length_back": 75.5,
+          "sleeve_cb": 91.5,
+          "shoulder": 52.5
+        }
+      }
+    },
+    {
+      "id": "kappa-hoodie",
+      "brand": "Kappa",
+      "model": "Худи мужское",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "Спортмастер, маркетплейсы",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 51,
+          "length_back": 67.0,
+          "sleeve_cb": 84.0,
+          "shoulder": 45.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 54,
+          "length_back": 68.5,
+          "sleeve_cb": 85.5,
+          "shoulder": 46.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 57,
+          "length_back": 70.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 48.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 60,
+          "length_back": 71.5,
+          "sleeve_cb": 88.5,
+          "shoulder": 49.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 63,
+          "length_back": 73.0,
+          "sleeve_cb": 90.0,
+          "shoulder": 51.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 66,
+          "length_back": 74.5,
+          "sleeve_cb": 91.5,
+          "shoulder": 52.5
+        }
+      }
+    },
+    {
+      "id": "fila-hoodie",
+      "brand": "FILA",
+      "model": "Худи мужское",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "Спортмастер, маркетплейсы",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 52,
+          "length_back": 67.0,
+          "sleeve_cb": 83.0,
+          "shoulder": 45.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 55,
+          "length_back": 68.5,
+          "sleeve_cb": 84.5,
+          "shoulder": 46.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 58,
+          "length_back": 70.0,
+          "sleeve_cb": 86.0,
+          "shoulder": 48.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 61,
+          "length_back": 71.5,
+          "sleeve_cb": 87.5,
+          "shoulder": 49.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 64,
+          "length_back": 73.0,
+          "sleeve_cb": 89.0,
+          "shoulder": 51.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 67,
+          "length_back": 74.5,
+          "sleeve_cb": 90.5,
+          "shoulder": 52.5
+        }
+      }
+    },
+    {
+      "id": "outventure-fleece",
+      "brand": "Outventure",
+      "model": "Джемпер флисовый",
+      "category": "sweater",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "полиэстер, флис",
+      "availability": "Спортмастер, маркетплейсы",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 51,
+          "length_back": 67.0,
+          "sleeve_cb": 84.0,
+          "shoulder": 45.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 54,
+          "length_back": 68.5,
+          "sleeve_cb": 85.5,
+          "shoulder": 46.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 57,
+          "length_back": 70.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 48.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 60,
+          "length_back": 71.5,
+          "sleeve_cb": 88.5,
+          "shoulder": 49.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 63,
+          "length_back": 73.0,
+          "sleeve_cb": 90.0,
+          "shoulder": 51.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 66,
+          "length_back": 74.5,
+          "sleeve_cb": 91.5,
+          "shoulder": 52.5
+        }
+      }
+    },
+    {
+      "id": "uniqlo-sweat-hoodie",
+      "brand": "Uniqlo",
+      "model": "Sweat Pullover Hoodie",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Азиатская сетка, обычно на размер меньше европейской. Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 50,
+          "length_back": 66.0,
+          "sleeve_cb": 83.0,
+          "shoulder": 43.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 53,
+          "length_back": 67.5,
+          "sleeve_cb": 84.5,
+          "shoulder": 44.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 56,
+          "length_back": 69.0,
+          "sleeve_cb": 86.0,
+          "shoulder": 46.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 59,
+          "length_back": 70.5,
+          "sleeve_cb": 87.5,
+          "shoulder": 47.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 62,
+          "length_back": 72.0,
+          "sleeve_cb": 89.0,
+          "shoulder": 49.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 65,
+          "length_back": 73.5,
+          "sleeve_cb": 90.5,
+          "shoulder": 50.5
+        }
+      }
+    },
+    {
+      "id": "uniqlo-merino-crew",
+      "brand": "Uniqlo",
+      "model": "Extra Fine Merino Crew Neck",
+      "category": "sweater",
+      "gender": "men",
+      "fit": "slim",
+      "shoulder_type": "set_in",
+      "fabric": "100% меринос",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 46.0,
+          "length_back": 64.0,
+          "sleeve_cb": 80.0,
+          "shoulder": 41.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 48.5,
+          "length_back": 65.5,
+          "sleeve_cb": 81.5,
+          "shoulder": 42.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 51.0,
+          "length_back": 67.0,
+          "sleeve_cb": 83.0,
+          "shoulder": 44.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 53.5,
+          "length_back": 68.5,
+          "sleeve_cb": 84.5,
+          "shoulder": 45.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 56.0,
+          "length_back": 70.0,
+          "sleeve_cb": 86.0,
+          "shoulder": 47.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 58.5,
+          "length_back": 71.5,
+          "sleeve_cb": 87.5,
+          "shoulder": 48.5
+        }
+      }
+    },
+    {
+      "id": "hm-regular-hoodie",
+      "brand": "H&M",
+      "model": "Regular Fit Hoodie",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 51,
+          "length_back": 67.0,
+          "sleeve_cb": 83.0,
+          "shoulder": 45.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 54,
+          "length_back": 68.5,
+          "sleeve_cb": 84.5,
+          "shoulder": 46.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 57,
+          "length_back": 70.0,
+          "sleeve_cb": 86.0,
+          "shoulder": 48.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 60,
+          "length_back": 71.5,
+          "sleeve_cb": 87.5,
+          "shoulder": 49.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 63,
+          "length_back": 73.0,
+          "sleeve_cb": 89.0,
+          "shoulder": 51.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 66,
+          "length_back": 74.5,
+          "sleeve_cb": 90.5,
+          "shoulder": 52.5
+        }
+      }
+    },
+    {
+      "id": "hm-knit-jumper",
+      "brand": "H&M",
+      "model": "Fine-knit Cotton Jumper",
+      "category": "sweater",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "100% хлопок, тонкая вязка",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 48.0,
+          "length_back": 65.0,
+          "sleeve_cb": 81.0,
+          "shoulder": 42.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 50.5,
+          "length_back": 66.5,
+          "sleeve_cb": 82.5,
+          "shoulder": 43.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 53.0,
+          "length_back": 68.0,
+          "sleeve_cb": 84.0,
+          "shoulder": 45.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 55.5,
+          "length_back": 69.5,
+          "sleeve_cb": 85.5,
+          "shoulder": 46.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 58.0,
+          "length_back": 71.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 48.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 60.5,
+          "length_back": 72.5,
+          "sleeve_cb": 88.5,
+          "shoulder": 49.5
+        }
+      }
+    },
+    {
+      "id": "zara-basic-hoodie",
+      "brand": "Zara",
+      "model": "Basic Hoodie",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 52,
+          "length_back": 67.0,
+          "sleeve_cb": 83.0,
+          "shoulder": 45.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 55,
+          "length_back": 68.5,
+          "sleeve_cb": 84.5,
+          "shoulder": 46.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 58,
+          "length_back": 70.0,
+          "sleeve_cb": 86.0,
+          "shoulder": 48.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 61,
+          "length_back": 71.5,
+          "sleeve_cb": 87.5,
+          "shoulder": 49.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 64,
+          "length_back": 73.0,
+          "sleeve_cb": 89.0,
+          "shoulder": 51.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 67,
+          "length_back": 74.5,
+          "sleeve_cb": 90.5,
+          "shoulder": 52.5
+        }
+      }
+    },
+    {
+      "id": "zara-knit-sweater",
+      "brand": "Zara",
+      "model": "Basic Knit Sweater",
+      "category": "sweater",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "вязаный трикотаж",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 49.0,
+          "length_back": 65.0,
+          "sleeve_cb": 81.0,
+          "shoulder": 43.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 51.5,
+          "length_back": 66.5,
+          "sleeve_cb": 82.5,
+          "shoulder": 44.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 54.0,
+          "length_back": 68.0,
+          "sleeve_cb": 84.0,
+          "shoulder": 46.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 56.5,
+          "length_back": 69.5,
+          "sleeve_cb": 85.5,
+          "shoulder": 47.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 59.0,
+          "length_back": 71.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 49.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 61.5,
+          "length_back": 72.5,
+          "sleeve_cb": 88.5,
+          "shoulder": 50.5
+        }
+      }
+    },
+    {
+      "id": "pullbear-hoodie",
+      "brand": "Pull&Bear",
+      "model": "Basic Hoodie",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "relaxed",
+      "shoulder_type": "drop",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 54,
+          "length_back": 67.0,
+          "sleeve_cb": 85.0,
+          "shoulder": 49.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 57,
+          "length_back": 68.5,
+          "sleeve_cb": 86.5,
+          "shoulder": 50.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 60,
+          "length_back": 70.0,
+          "sleeve_cb": 88.0,
+          "shoulder": 52.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 63,
+          "length_back": 71.5,
+          "sleeve_cb": 89.5,
+          "shoulder": 53.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 66,
+          "length_back": 73.0,
+          "sleeve_cb": 91.0,
+          "shoulder": 55.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 69,
+          "length_back": 74.5,
+          "sleeve_cb": 92.5,
+          "shoulder": 56.5
+        }
+      }
+    },
+    {
+      "id": "bershka-hoodie-oversize",
+      "brand": "Bershka",
+      "model": "Oversize Hoodie",
+      "category": "hoodie",
+      "gender": "unisex",
+      "fit": "oversize",
+      "shoulder_type": "drop",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 57,
+          "length_back": 65.0,
+          "sleeve_cb": 85.0,
+          "shoulder": 53.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 60,
+          "length_back": 66.5,
+          "sleeve_cb": 86.0,
+          "shoulder": 55.0
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 63,
+          "length_back": 68.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 57.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 66,
+          "length_back": 69.5,
+          "sleeve_cb": 88.0,
+          "shoulder": 59.0
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 69,
+          "length_back": 71.0,
+          "sleeve_cb": 89.0,
+          "shoulder": 61.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 72,
+          "length_back": 72.5,
+          "sleeve_cb": 90.0,
+          "shoulder": 63.0
+        }
+      }
+    },
+    {
+      "id": "nike-club-fleece-hoodie",
+      "brand": "Nike",
+      "model": "Club Fleece Pullover Hoodie (розница)",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "raglan",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Ориентир — B2B-спецификация Club Fleece. Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 53,
+          "length_back": 67.0,
+          "sleeve_cb": 87.0,
+          "shoulder": null
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 56,
+          "length_back": 68.5,
+          "sleeve_cb": 88.5,
+          "shoulder": null
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 59,
+          "length_back": 70.0,
+          "sleeve_cb": 90.0,
+          "shoulder": null
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 62,
+          "length_back": 71.5,
+          "sleeve_cb": 91.5,
+          "shoulder": null
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 65,
+          "length_back": 73.0,
+          "sleeve_cb": 93.0,
+          "shoulder": null
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 68,
+          "length_back": 74.5,
+          "sleeve_cb": 94.5,
+          "shoulder": null
+        }
+      }
+    },
+    {
+      "id": "nike-tech-fleece-hoodie",
+      "brand": "Nike",
+      "model": "Tech Fleece Full-Zip Hoodie",
+      "category": "zip_hoodie",
+      "gender": "men",
+      "fit": "slim",
+      "shoulder_type": "raglan",
+      "fabric": "спейсер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 47,
+          "length_back": 67.0,
+          "sleeve_cb": 86.0,
+          "shoulder": null
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 50,
+          "length_back": 68.5,
+          "sleeve_cb": 87.5,
+          "shoulder": null
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 53,
+          "length_back": 70.0,
+          "sleeve_cb": 89.0,
+          "shoulder": null
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 56,
+          "length_back": 71.5,
+          "sleeve_cb": 90.5,
+          "shoulder": null
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 59,
+          "length_back": 73.0,
+          "sleeve_cb": 92.0,
+          "shoulder": null
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 62,
+          "length_back": 74.5,
+          "sleeve_cb": 93.5,
+          "shoulder": null
+        }
+      }
+    },
+    {
+      "id": "adidas-ess-3s-hoodie",
+      "brand": "adidas",
+      "model": "Essentials 3-Stripes Fleece Hoodie",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 51,
+          "length_back": 68.0,
+          "sleeve_cb": 85.0,
+          "shoulder": 44.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 54,
+          "length_back": 69.5,
+          "sleeve_cb": 86.5,
+          "shoulder": 45.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 57,
+          "length_back": 71.0,
+          "sleeve_cb": 88.0,
+          "shoulder": 47.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 60,
+          "length_back": 72.5,
+          "sleeve_cb": 89.5,
+          "shoulder": 48.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 63,
+          "length_back": 74.0,
+          "sleeve_cb": 91.0,
+          "shoulder": 50.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 66,
+          "length_back": 75.5,
+          "sleeve_cb": 92.5,
+          "shoulder": 51.5
+        }
+      }
+    },
+    {
+      "id": "adidas-trefoil-hoodie",
+      "brand": "adidas Originals",
+      "model": "Trefoil Hoodie",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 52,
+          "length_back": 67.0,
+          "sleeve_cb": 85.0,
+          "shoulder": 45.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 55,
+          "length_back": 68.5,
+          "sleeve_cb": 86.5,
+          "shoulder": 46.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 58,
+          "length_back": 70.0,
+          "sleeve_cb": 88.0,
+          "shoulder": 48.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 61,
+          "length_back": 71.5,
+          "sleeve_cb": 89.5,
+          "shoulder": 49.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 64,
+          "length_back": 73.0,
+          "sleeve_cb": 91.0,
+          "shoulder": 51.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 67,
+          "length_back": 74.5,
+          "sleeve_cb": 92.5,
+          "shoulder": 52.5
+        }
+      }
+    },
+    {
+      "id": "adidas-ess-crew",
+      "brand": "adidas",
+      "model": "Essentials Fleece Crew",
+      "category": "sweatshirt",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 51,
+          "length_back": 66.0,
+          "sleeve_cb": 84.0,
+          "shoulder": 44.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 54,
+          "length_back": 67.5,
+          "sleeve_cb": 85.5,
+          "shoulder": 45.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 57,
+          "length_back": 69.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 47.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 60,
+          "length_back": 70.5,
+          "sleeve_cb": 88.5,
+          "shoulder": 48.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 63,
+          "length_back": 72.0,
+          "sleeve_cb": 90.0,
+          "shoulder": 50.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 66,
+          "length_back": 73.5,
+          "sleeve_cb": 91.5,
+          "shoulder": 51.5
+        }
+      }
+    },
+    {
+      "id": "puma-ess-big-logo",
+      "brand": "Puma",
+      "model": "ESS Big Logo Hoodie",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 50,
+          "length_back": 67.0,
+          "sleeve_cb": 84.0,
+          "shoulder": 44.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 53,
+          "length_back": 68.5,
+          "sleeve_cb": 85.5,
+          "shoulder": 45.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 56,
+          "length_back": 70.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 47.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 59,
+          "length_back": 71.5,
+          "sleeve_cb": 88.5,
+          "shoulder": 48.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 62,
+          "length_back": 73.0,
+          "sleeve_cb": 90.0,
+          "shoulder": 50.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 65,
+          "length_back": 74.5,
+          "sleeve_cb": 91.5,
+          "shoulder": 51.5
+        }
+      }
+    },
+    {
+      "id": "nb-essentials-hoodie",
+      "brand": "New Balance",
+      "model": "Essentials Stacked Logo Hoodie",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "relaxed",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 53,
+          "length_back": 68.0,
+          "sleeve_cb": 84.0,
+          "shoulder": 47.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 56,
+          "length_back": 69.5,
+          "sleeve_cb": 85.5,
+          "shoulder": 48.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 59,
+          "length_back": 71.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 50.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 62,
+          "length_back": 72.5,
+          "sleeve_cb": 88.5,
+          "shoulder": 51.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 65,
+          "length_back": 74.0,
+          "sleeve_cb": 90.0,
+          "shoulder": 53.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 68,
+          "length_back": 75.5,
+          "sleeve_cb": 91.5,
+          "shoulder": 54.5
+        }
+      }
+    },
+    {
+      "id": "tnf-drew-peak",
+      "brand": "The North Face",
+      "model": "Drew Peak Hoodie",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 51,
+          "length_back": 67.0,
+          "sleeve_cb": 84.0,
+          "shoulder": 45.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 54,
+          "length_back": 68.5,
+          "sleeve_cb": 85.5,
+          "shoulder": 46.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 57,
+          "length_back": 70.0,
+          "sleeve_cb": 87.0,
+          "shoulder": 48.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 60,
+          "length_back": 71.5,
+          "sleeve_cb": 88.5,
+          "shoulder": 49.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 63,
+          "length_back": 73.0,
+          "sleeve_cb": 90.0,
+          "shoulder": 51.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 66,
+          "length_back": 74.5,
+          "sleeve_cb": 91.5,
+          "shoulder": 52.5
+        }
+      }
+    },
+    {
+      "id": "champion-reverse-weave",
+      "brand": "Champion",
+      "model": "Reverse Weave Hoodie",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "relaxed",
+      "shoulder_type": "raglan",
+      "fabric": "хлопок, плотный футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Короткий коробчатый крой. Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 55,
+          "length_back": 66.0,
+          "sleeve_cb": 83.0,
+          "shoulder": null
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 58,
+          "length_back": 67.5,
+          "sleeve_cb": 84.5,
+          "shoulder": null
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 61,
+          "length_back": 69.0,
+          "sleeve_cb": 86.0,
+          "shoulder": null
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 64,
+          "length_back": 70.5,
+          "sleeve_cb": 87.5,
+          "shoulder": null
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 67,
+          "length_back": 72.0,
+          "sleeve_cb": 89.0,
+          "shoulder": null
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 70,
+          "length_back": 73.5,
+          "sleeve_cb": 90.5,
+          "shoulder": null
+        }
+      }
+    },
+    {
+      "id": "carhartt-chase-hoodie",
+      "brand": "Carhartt WIP",
+      "model": "Hooded Chase Sweatshirt",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "relaxed",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 54,
+          "length_back": 68.0,
+          "sleeve_cb": 83.0,
+          "shoulder": 48.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 57,
+          "length_back": 69.5,
+          "sleeve_cb": 84.5,
+          "shoulder": 49.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 60,
+          "length_back": 71.0,
+          "sleeve_cb": 86.0,
+          "shoulder": 51.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 63,
+          "length_back": 72.5,
+          "sleeve_cb": 87.5,
+          "shoulder": 52.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 66,
+          "length_back": 74.0,
+          "sleeve_cb": 89.0,
+          "shoulder": 54.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 69,
+          "length_back": 75.5,
+          "sleeve_cb": 90.5,
+          "shoulder": 55.5
+        }
+      }
+    },
+    {
+      "id": "levis-standard-hoodie",
+      "brand": "Levi's",
+      "model": "Standard Graphic Hoodie",
+      "category": "hoodie",
+      "gender": "men",
+      "fit": "regular",
+      "shoulder_type": "set_in",
+      "fabric": "хлопок/полиэстер, футер",
+      "availability": "параллельный импорт, маркетплейсы, б/у",
+      "confidence": "estimated",
+      "estimated_fields": [
+        "chest_half",
+        "length_back",
+        "sleeve_cb",
+        "shoulder"
+      ],
+      "source": null,
+      "note": "Оценка по типичному крою и градации; заменить обмерами изделия.",
+      "sizes": {
+        "XS": {
+          "ru": "44",
+          "chest_half": 52,
+          "length_back": 67.0,
+          "sleeve_cb": 83.0,
+          "shoulder": 45.0
+        },
+        "S": {
+          "ru": "46",
+          "chest_half": 55,
+          "length_back": 68.5,
+          "sleeve_cb": 84.5,
+          "shoulder": 46.5
+        },
+        "M": {
+          "ru": "48",
+          "chest_half": 58,
+          "length_back": 70.0,
+          "sleeve_cb": 86.0,
+          "shoulder": 48.0
+        },
+        "L": {
+          "ru": "50",
+          "chest_half": 61,
+          "length_back": 71.5,
+          "sleeve_cb": 87.5,
+          "shoulder": 49.5
+        },
+        "XL": {
+          "ru": "52",
+          "chest_half": 64,
+          "length_back": 73.0,
+          "sleeve_cb": 89.0,
+          "shoulder": 51.0
+        },
+        "XXL": {
+          "ru": "54",
+          "chest_half": 67,
+          "length_back": 74.5,
+          "sleeve_cb": 90.5,
+          "shoulder": 52.5
+        }
+      }
+    }
+  ]
+}

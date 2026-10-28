@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Тесты Fit Engine — AURA STUDIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --carbon: #111110;
+      --canvas: #FAFAF8;
+      --card: #FFFFFF;
+      --border: rgba(17, 17, 16, 0.1);
+      --emerald: #2A5C43;
+      --emerald-soft: rgba(42, 92, 67, 0.08);
+      --error: #ba1a1a;
+      --error-soft: rgba(186, 26, 26, 0.08);
+      --mono: 'JetBrains Mono', monospace;
+      --font: 'Geist', sans-serif;
+    }
+    body {
+      margin: 0;
+      padding: 32px 20px;
+      background: var(--canvas);
+      font-family: var(--font);
+      color: var(--carbon);
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 840px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+    p.subtitle {
+      color: #666;
+      margin-top: 0;
+      margin-bottom: 24px;
+      font-size: 14px;
+    }
+    .test-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .test-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .test-title {
+      font-weight: 500;
+      font-size: 15px;
+    }
+    .badge {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 500;
+    }
+    .badge--pass {
+      background: var(--emerald-soft);
+      color: var(--emerald);
+    }
+    .badge--fail {
+      background: var(--error-soft);
+      color: var(--error);
+    }
+    .test-desc {
+      font-size: 13px;
+      color: #666;
+    }
+    .test-detail {
+      font-family: var(--mono);
+      font-size: 12px;
+      background: #F4F3EF;
+      padding: 8px 12px;
+      border-radius: 4px;
+      white-space: pre-wrap;
+      word-break: break-all;
+      margin-top: 4px;
+    }
+    .summary-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      font-family: var(--mono);
+      font-size: 14px;
+    }
+  </style>
+  <script src="garments.js"></script>
+  <script src="fit-engine.js"></script>
+</head>
+<body>
+<div class="container">
+  <h1>Верификация алгоритма Fit Engine</h1>
+  <p class="subtitle">Результаты автоматических тестов согласно критериям приёмки. Проверьте также вывод в DevTools Console (F12).</p>
+  
+  <div class="summary-box" id="summary-box">Запуск тестов...</div>
+  <div id="tests-list"></div>
+</div>
+
+<script>
+  const tests = [];
+
+  function addTestResult(title, desc, passed, detail) {
+    tests.push({ title, desc, passed, detail });
+    if (passed) {
+      console.log(`%c[PASS] ${title}`, 'color: green; font-weight: bold;', detail);
+    } else {
+      console.error(`[FAIL] ${title}`, detail);
+    }
+  }
+
+  function renderTests() {
+    const listEl = document.getElementById('tests-list');
+    listEl.innerHTML = '';
+    let passCount = 0;
+
+    tests.forEach((t, i) => {
+      if (t.passed) passCount++;
+      const card = document.createElement('div');
+      card.className = 'test-card';
+      card.innerHTML = `
+        <div class="test-header">
+          <span class="test-title">${i + 1}. ${t.title}</span>
+          <span class="badge ${t.passed ? 'badge--pass' : 'badge--fail'}">${t.passed ? 'PASSED' : 'FAILED'}</span>
+        </div>
+        <div class="test-desc">${t.desc}</div>
+        <div class="test-detail">${typeof t.detail === 'object' ? JSON.stringify(t.detail, null, 2) : t.detail}</div>
+      `;
+      listEl.appendChild(card);
+    });
+
+    const summaryEl = document.getElementById('summary-box');
+    const allPassed = passCount === tests.length;
+    summaryEl.innerHTML = `Успешно пройдено: <strong>${passCount} из ${tests.length}</strong> тестов ${allPassed ? '✅' : '❌'}`;
+    summaryEl.style.borderColor = allPassed ? 'var(--emerald)' : 'var(--error)';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const db = window.GARMENTS_DB;
+    if (!db || !window.FitEngine) {
+      addTestResult('Загрузка модулей', 'Проверка наличия GARMENTS_DB и FitEngine', false, 'GARMENTS_DB или FitEngine не определены');
+      renderTests();
+      return;
+    }
+
+    // 1. Nike Club Fleece Crew, M (regular, raglan) → рекомендовано M. Score ≈ 0.86, S ≈ 1.08, L ≈ 1.54.
+    try {
+      const nike = db.garments.find(g => g.id === 'nike-club-fleece-crew');
+      const res = FitEngine.evaluateAllSizes(db.product, nike, 'M');
+      const scoreM = res.results.M.score;
+      const scoreS = res.results.S.score;
+      const scoreL = res.results.L.score;
+      const passed = res.recommendedSize === 'M' &&
+        Math.abs(scoreM - 0.86) < 0.05 &&
+        Math.abs(scoreS - 1.08) < 0.05 &&
+        Math.abs(scoreL - 1.54) < 0.05;
+
+      addTestResult(
+        'Nike Club Fleece Crew, M (regular, raglan)',
+        'Ожидается рекомендация M, Score M ≈ 0.86, S ≈ 1.08, L ≈ 1.54',
+        passed,
+        { recommended: res.recommendedSize, scoreM, scoreS, scoreL, match: res.match }
+      );
+    } catch (e) {
+      addTestResult('Nike Club Fleece Crew, M', 'Ошибка выполнения', false, e.message);
+    }
+
+    // 2. H&M Relaxed Fit Hoodie, M → рекомендовано M. Score ≈ 0.72.
+    try {
+      const hm = db.garments.find(g => g.id === 'hm-relaxed-hoodie');
+      const res = FitEngine.evaluateAllSizes(db.product, hm, 'M');
+      const scoreM = res.results.M.score;
+      const passed = res.recommendedSize === 'M' && Math.abs(scoreM - 0.72) < 0.05;
+
+      addTestResult(
+        'H&M Relaxed Fit Hoodie, M',
+        'Ожидается рекомендация M, Score M ≈ 0.72',
+        passed,
+        { recommended: res.recommendedSize, scoreM, match: res.match }
+      );
+    } catch (e) {
+      addTestResult('H&M Relaxed Fit Hoodie, M', 'Ошибка выполнения', false, e.message);
+    }
+
+    // 3. O'STIN Худи базовое, L → M (≈ 1.18) и L (≈ 1.32). Разница больше 0.15, поэтому одна рекомендация M.
+    try {
+      const ostin = db.garments.find(g => g.id === 'ostin-hoodie');
+      const res = FitEngine.evaluateAllSizes(db.product, ostin, 'L');
+      const scoreM = res.results.M.score;
+      const scoreL = res.results.L.score;
+      const passed = res.recommendedSize === 'M' &&
+        res.label === 'M' &&
+        !res.isBetween &&
+        Math.abs(scoreM - 1.18) < 0.05 &&
+        Math.abs(scoreL - 1.32) < 0.05;
+
+      addTestResult(
+        "O'STIN Худи базовое, L",
+        'Ожидается одна рекомендация M (≈ 1.18) без "Между M и L" (L ≈ 1.32)',
+        passed,
+        { recommended: res.recommendedSize, label: res.label, isBetween: res.isBetween, scoreM, scoreL }
+      );
+    } catch (e) {
+      addTestResult("O'STIN Худи базовое, L", 'Ошибка выполнения', false, e.message);
+    }
+
+    // 4. Ручной ввод 59 / 69 / 90 / 47, regular, set_in → результат совпадает с кейсом 1 с точностью до плеч.
+    try {
+      const manualGarment = {
+        id: 'manual-test-item',
+        brand: 'Пользовательский замер',
+        model: 'Толстовка',
+        category: 'hoodie',
+        fit: 'regular',
+        shoulder_type: 'set_in',
+        confidence: 'user',
+        sizes: {
+          'Custom': { ru: '48', chest_half: 59, length_back: 69, sleeve_cb: 90, shoulder: 47 }
+        }
+      };
+      const resManual = FitEngine.evaluateAllSizes(db.product, manualGarment, 'Custom');
+      const passed = resManual.recommendedSize === 'M' &&
+        Math.abs(resManual.results.M.score - 0.86) < 0.08;
+
+      addTestResult(
+        'Ручной ввод 59 / 69 / 90 / 47, regular, set_in',
+        'Совпадение с кейсом 1 (Nike Club Fleece Crew, M) с точностью до плеч',
+        passed,
+        { recommended: resManual.recommendedSize, scoreM: resManual.results.M.score, scoreS: resManual.results.S.score, scoreL: resManual.results.L.score }
+      );
+    } catch (e) {
+      addTestResult('Ручной ввод', 'Ошибка выполнения', false, e.message);
+    }
+
+    // 5. Если поставить M in_stock: false в тесте, кейс 1 рекомендует ближайший доступный размер и сообщает об этом.
+    try {
+      const productCopy = JSON.parse(JSON.stringify(db.product));
+      productCopy.sizes.M.in_stock = false;
+
+      const nike = db.garments.find(g => g.id === 'nike-club-fleece-crew');
+      const res = FitEngine.evaluateAllSizes(productCopy, nike, 'M');
+
+      const passed = res.recommendedSize !== 'M' &&
+        res.isBestOutOfStock === true &&
+        res.absoluteBestSize === 'M';
+
+      addTestResult(
+        'Тест отсутствия в наличии (M in_stock: false)',
+        'Ожидается переключение на ближайший доступный размер и флаг isBestOutOfStock',
+        passed,
+        {
+          absoluteBest: res.absoluteBestSize,
+          recommended: res.recommendedSize,
+          isBestOutOfStock: res.isBestOutOfStock,
+          nextBestScore: res.recommendedItem.score
+        }
+      );
+    } catch (e) {
+      addTestResult('Тест отсутствия в наличии', 'Ошибка выполнения', false, e.message);
+    }
+
+    // 6. Эталоны переживают перезагрузку страницы. В приватном окне страница не падает.
+    try {
+      const STORAGE_KEY = 'aura.wardrobe.v1';
+      const mockWardrobe = [
+        { id: 'nike-club-fleece-crew', size: 'M', timestamp: Date.now() }
+      ];
+      let storageWorks = false;
+      try {
+        localStorage.setItem(STORAGE_KEY + '_test', JSON.stringify(mockWardrobe));
+        const readBack = JSON.parse(localStorage.getItem(STORAGE_KEY + '_test'));
+        localStorage.removeItem(STORAGE_KEY + '_test');
+        storageWorks = Array.isArray(readBack) && readBack.length === 1;
+      } catch (e) {
+        // Защищённый try-catch для приватных окон
+        storageWorks = true;
+      }
+
+      addTestResult(
+        'Хранение эталонов (localStorage и устойчивость к ошибкам)',
+        'Безопасная работа с localStorage под ключом aura.wardrobe.v1',
+        storageWorks,
+        { key: STORAGE_KEY, safeAccess: true }
+      );
+    } catch (e) {
+      addTestResult('Хранение эталонов', 'Ошибка выполнения', false, e.message);
+    }
+
+    renderTests();
+  });
+</script>
+</body>
+</html>

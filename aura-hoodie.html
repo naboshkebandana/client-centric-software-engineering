@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AURA STUDIO — Heavyweight Fleece Hoodie</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<!-- База вещей и алгоритм Fit Engine -->
+<script src="garments.js"></script>
+<script src="fit-engine.js"></script>
+
+<style>
+/* ============ ТОКЕНЫ ============ */
+:root {
+  --carbon: #111110;
+  --carbon-hover: #222220;
+  --canvas: #FAFAF8;
+  --card: #FFFFFF;
+  --subtle: #F3F2EE;
+
+  --hairline: rgba(17, 17, 16, 0.08);
+  --divider: rgba(17, 17, 16, 0.06);
+  --border-strong: rgba(17, 17, 16, 0.15);
+  --border-active: rgba(17, 17, 16, 0.85);
+
+  --text: #1c1c19;
+  --text-2: #4a4a47;
+  --text-3: #767471;
+  --text-4: #a8a6a2;
+  --text-5: #d4d2ce;
+
+  --emerald: #2A5C43;
+  --emerald-soft: rgba(42, 92, 67, 0.08);
+  --emerald-ring: rgba(42, 92, 67, 0.45);
+  --indigo: #3142A5;
+
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 12px;
+
+  --shadow-float: 0 8px 32px -4px rgba(17,17,16,0.06), 0 2px 6px -1px rgba(17,17,16,0.03);
+  --shadow-modal: 0 24px 64px -12px rgba(17,17,16,0.14);
+
+  --font: 'Geist', system-ui, -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============ БАЗА ============ */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--canvas);
+  color: var(--text);
+  font: 400 14px/1.5 var(--font);
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+::selection { background: var(--carbon); color: #fff; }
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-thumb { background: #e6e2de; border-radius: 2px; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+h1, h3, p, ul { margin: 0; }
+
+.material-symbols-outlined {
+  font-size: 20px;
+  line-height: 1;
+  font-variation-settings: 'wght' 300, 'opsz' 20, 'FILL' 0;
+}
+.i-14 { font-size: 14px; }
+.i-16 { font-size: 16px; }
+.i-18 { font-size: 18px; }
+.i-22 { font-size: 22px; }
+
+.mono { font-family: var(--mono); }
+.muted { font-size: 12px; color: var(--text-3); }
+.strong { font-weight: 500; color: var(--carbon); }
+.is-hidden { display: none !important; }
+
+.container { max-width: 1600px; margin: 0 auto; padding: 0 24px; }
+@media (min-width: 1024px) { .container { padding: 0 48px; } }
+
+.row { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.row-start { display: flex; align-items: center; gap: 8px; }
+
+.dot { width: 6px; height: 6px; border-radius: 50%; flex: none; }
+.dot--emerald { background: var(--emerald); }
+.dot--indigo { background: var(--indigo); }
+.dot--muted { background: var(--text-4); }
+
+.text-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--carbon);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-color: var(--text-5);
+  padding: 8px 0;
+  margin: -8px 0;
+  transition: text-decoration-color .2s, color .2s;
+}
+.text-link:hover { text-decoration-color: var(--carbon); }
+.text-link--quiet { font-weight: 400; color: var(--text-2); }
+.text-link--sm { font-size: 12px; font-weight: 400; color: var(--text-3); }
+.text-link--sm:hover { color: var(--carbon); }
+
+/* ============ ХЕДЕР ============ */
+.header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 40;
+  background: rgba(250, 250, 248, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hairline);
+}
+.header-inner { height: 64px; display: flex; align-items: center; justify-content: space-between; }
+.header-left { display: flex; align-items: center; gap: 40px; }
+.logo { font-size: 18px; font-weight: 600; letter-spacing: -0.04em; text-transform: uppercase; color: var(--carbon); user-select: none; }
+.nav { display: none; gap: 28px; font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-3); }
+.nav a { transition: color .2s; }
+.nav a:hover, .nav a[aria-current] { color: var(--carbon); }
+@media (min-width: 768px) { .nav { display: flex; } }
+.header-actions { display: flex; gap: 4px; color: #333; }
+.icon-btn { position: relative; display: block; padding: 8px; border-radius: var(--r-sm); transition: background .2s; }
+.icon-btn:hover { background: var(--subtle); }
+.icon-btn .material-symbols-outlined { display: block; }
+.badge {
+  position: absolute; top: 4px; right: 2px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--carbon); color: #fff;
+  font: 500 9px/14px var(--mono); text-align: center;
+}
+
+/* ============ СТРАНИЦА ============ */
+main { padding: 96px 0 80px; }
+.breadcrumbs { display: flex; align-items: center; gap: 8px; margin-bottom: 24px; font-size: 12px; color: var(--text-3); }
+.breadcrumbs a:hover { color: var(--carbon); }
+.breadcrumbs .sep { color: var(--text-5); }
+.breadcrumbs .current { color: #333; }
+
+.pdp { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; align-items: start; }
+@media (min-width: 1024px) { .pdp { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); } }
+@media (min-width: 1280px) { .pdp { gap: 64px; } }
+
+/* ============ ГАЛЕРЕЯ ============ */
+.gallery { display: flex; flex-direction: column; gap: 24px; }
+.media { position: relative; overflow: hidden; border-radius: var(--r-sm); background: #efeeeb; }
+.media img { width: 100%; height: 100%; object-fit: cover; }
+.media--hero { aspect-ratio: 4 / 5; }
+.media--detail { aspect-ratio: 3 / 4; }
+.media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.media-tag {
+  position: absolute; left: 16px; bottom: 16px;
+  padding: 4px 10px; border-radius: var(--r-sm);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  font-size: 12px; color: #333;
+}
+.media--detail .media-tag { left: 12px; bottom: 12px; padding: 4px 8px; }
+.ar-btn {
+  position: absolute; right: 16px; bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+  padding: 8px 14px; border-radius: var(--r-sm);
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-float);
+  font-size: 12px; font-weight: 500; color: var(--carbon);
+  transition: background .2s, color .2s;
+}
+.ar-btn:hover { background: var(--carbon); color: #fff; }
+
+/* ============ ТАБЫ ============ */
+.tabs-wrap { padding-top: 32px; border-top: 1px solid var(--hairline); }
+.tabs { display: flex; gap: 32px; border-bottom: 1px solid var(--hairline); }
+.tab {
+  padding-bottom: 12px; margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--text-3);
+  transition: color .2s, border-color .2s;
+}
+.tab:hover { color: var(--carbon); }
+.tab.is-active { color: var(--carbon); border-color: var(--carbon); }
+.tab-panel { padding: 24px 0; display: flex; flex-direction: column; gap: 16px; }
+
+.prose { max-width: 42rem; display: flex; flex-direction: column; gap: 16px; color: var(--text-2); line-height: 1.65; }
+.specs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; padding-top: 20px; margin-top: 8px; border-top: 1px solid var(--divider); }
+@media (min-width: 640px) { .specs { grid-template-columns: repeat(3, 1fr); } }
+.label { display: block; font-size: 12px; color: var(--text-3); }
+.value { font-weight: 500; color: var(--carbon); }
+
+/* ============ КАРТОЧКИ ============ */
+.card { background: var(--card); border: 1px solid var(--hairline); border-radius: var(--r-md); padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.card--summary { gap: 12px; }
+.card--lab { padding: 20px; gap: 16px; }
+.summary-list { padding-left: 16px; display: flex; flex-direction: column; gap: 6px; color: var(--text-2); line-height: 1.65; }
+.summary-list li::marker { color: var(--text-5); }
+.review-text { color: var(--text-2); line-height: 1.65; }
+.verified { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--text-3); white-space: nowrap; }
+
+.lab-head { display: flex; flex-direction: column; gap: 8px; padding-bottom: 16px; border-bottom: 1px solid var(--divider); }
+@media (min-width: 640px) { .lab-head { flex-direction: row; align-items: center; justify-content: space-between; } }
+.lab-title { font-size: 15px; font-weight: 500; color: var(--carbon); }
+.pill { display: inline-flex; align-items: center; gap: 6px; align-self: flex-start; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 500; }
+@media (min-width: 640px) { .pill { align-self: center; } }
+.pill--emerald { background: var(--emerald-soft); color: var(--emerald); }
+.pill--indigo { background: rgba(49, 66, 165, 0.08); color: var(--indigo); }
+.pill--neutral { background: var(--subtle); color: var(--text-3); }
+
+.metrics { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; text-align: center; }
+.metric { padding: 12px; background: var(--subtle); border-radius: var(--r-sm); }
+.metric-value { display: block; margin-top: 4px; font: 500 16px/1.4 var(--mono); color: var(--carbon); }
+.metric-ref { display: block; font: 400 11px/1.4 var(--mono); color: var(--text-3); }
+
+/* ============ БЛОК ПОКУПКИ ============ */
+.buy { display: flex; flex-direction: column; gap: 28px; }
+@media (min-width: 1024px) { .buy { position: sticky; top: 96px; } }
+.buy-head { display: flex; flex-direction: column; gap: 8px; padding-bottom: 24px; border-bottom: 1px solid var(--hairline); }
+.title { font-size: 24px; line-height: 30px; font-weight: 400; letter-spacing: -0.02em; color: var(--carbon); }
+@media (min-width: 1024px) { .title { font-size: 32px; line-height: 38px; } }
+.price-row { display: flex; align-items: baseline; gap: 12px; padding-top: 4px; }
+.price { font: 500 18px/1.3 var(--mono); color: var(--carbon); }
+.price-old { font: 400 12px var(--mono); color: var(--text-4); text-decoration: line-through; }
+.discount { font: 400 12px var(--mono); color: var(--text-2); }
+
+.field { display: flex; flex-direction: column; gap: 12px; }
+.field-head { display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-3); }
+
+.swatches { display: flex; gap: 12px; }
+.swatch {
+  width: 28px; height: 28px; border-radius: 50%;
+  box-shadow: 0 0 0 2px var(--canvas), 0 0 0 3px transparent;
+  transition: box-shadow .2s;
+}
+.swatch:hover { box-shadow: 0 0 0 2px var(--canvas), 0 0 0 3px rgba(17,17,16,0.25); }
+.swatch.is-selected { box-shadow: 0 0 0 2px var(--canvas), 0 0 0 3px var(--carbon); }
+.swatch--light { border: 1px solid var(--hairline); }
+
+.size-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.size-btn {
+  position: relative; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid var(--hairline); border-radius: var(--r-sm);
+  background: var(--card);
+  font: 400 13px var(--mono); color: var(--carbon);
+  transition: border-color .2s, background .2s, color .2s;
+}
+.size-btn:hover:not(:disabled) { border-color: var(--border-active); }
+.size-btn.is-selected { background: var(--carbon); border-color: var(--carbon); color: #fff; }
+.size-btn.is-recommended:not(.is-selected) { box-shadow: inset 0 0 0 1px var(--emerald-ring); }
+.rec-dot { position: absolute; top: 6px; right: 6px; width: 4px; height: 4px; border-radius: 50%; background: var(--emerald); }
+.size-btn.is-selected .rec-dot { background: #9dd2b3; }
+.size-btn:disabled {
+  background: linear-gradient(to top right, transparent calc(50% - 0.5px), rgba(17,17,16,0.15) 50%, transparent calc(50% + 0.5px));
+  border-color: var(--divider);
+  color: var(--text-5);
+  cursor: not-allowed;
+}
+
+/* ============ FIT-ВИДЖЕТ ============ */
+.fit { background: var(--card); border: 1px solid var(--hairline); border-radius: var(--r-md); padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+.fit-title { font-size: 14px; font-weight: 500; color: var(--carbon); }
+.fit-tag { font-size: 11px; color: var(--text-4); }
+.scale { display: flex; flex-direction: column; gap: 8px; }
+.scale-labels { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-3); }
+.scale-track { position: relative; height: 4px; border-radius: 999px; background: #efeeeb; }
+.scale-center { position: absolute; left: 50%; top: -3px; width: 1px; height: 10px; background: var(--text-5); }
+.scale-thumb {
+  position: absolute; top: -3px; width: 10px; height: 10px;
+  transform: translateX(-50%);
+  border-radius: 50%; background: var(--carbon);
+  box-shadow: 0 0 0 2px #fff;
+  transition: left .3s var(--ease);
+}
+.alert {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 10px; border-radius: var(--r-sm);
+  background: var(--subtle);
+  font-size: 13px; line-height: 1.4; color: var(--text-2);
+}
+.alert .material-symbols-outlined { color: var(--text-3); margin-top: 1px; }
+.fit-actions { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--divider); font-size: 13px; }
+.action-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 4px; margin: -8px -4px;
+  border-radius: var(--r-sm); color: var(--text-2);
+  transition: color .2s;
+}
+.action-btn:hover { color: var(--carbon); }
+.underline { text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--text-5); }
+
+/* ============ CTA ============ */
+.cta-wrap { display: flex; flex-direction: column; gap: 12px; }
+.btn-primary {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; height: 52px; padding: 0 24px;
+  border-radius: var(--r-sm);
+  background: var(--carbon); color: #fff;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  transition: background .2s, transform .1s;
+}
+.btn-primary:hover { background: var(--carbon-hover); }
+.btn-primary:active { transform: scale(0.99); }
+.btn-primary .mono { letter-spacing: 0; text-transform: none; }
+.delivery { display: flex; justify-content: center; align-items: center; gap: 8px; font-size: 12px; color: var(--text-3); }
+
+/* ============ АККОРДЕОНЫ ============ */
+.accordion { border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
+.accordion details + details { border-top: 1px solid var(--hairline); }
+.accordion summary {
+  height: 56px; display: flex; align-items: center; justify-content: space-between;
+  list-style: none; cursor: pointer;
+  font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  color: #333; transition: color .2s;
+}
+.accordion summary:hover { color: var(--carbon); }
+.accordion summary::-webkit-details-marker { display: none; }
+.accordion summary .material-symbols-outlined { transition: transform .3s var(--ease); }
+.accordion details[open] summary .material-symbols-outlined { transform: rotate(180deg); }
+.accordion-body { padding-bottom: 16px; color: var(--text-2); line-height: 1.65; }
+
+/* ============ МОДАЛКИ ============ */
+.modal {
+  position: fixed; inset: 0; z-index: 50;
+  display: none; align-items: center; justify-content: center;
+  padding: 16px;
+  background: rgba(17, 17, 16, 0.4);
+  backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px);
+}
+.modal.is-open { display: flex; }
+.modal-panel {
+  width: 100%; max-width: 760px; max-height: 90vh; overflow-y: auto;
+  background: var(--card); border-radius: var(--r-lg); box-shadow: var(--shadow-modal);
+  padding: 24px; display: flex; flex-direction: column; gap: 20px;
+}
+@media (min-width: 768px) { .modal-panel { padding: 32px; } }
+.modal-panel--sm { max-width: 576px; gap: 16px; }
+@media (min-width: 768px) { .modal-panel--sm { padding: 24px; } }
+.modal-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--divider); }
+.modal-title { font-size: 20px; font-weight: 500; letter-spacing: -0.015em; color: var(--carbon); }
+.modal-panel--sm .modal-title { font-size: 18px; }
+.close-btn { padding: 8px; margin: -8px; border-radius: var(--r-sm); color: var(--text-3); transition: color .2s, background .2s; }
+.close-btn:hover { color: var(--carbon); background: var(--subtle); }
+.close-btn .material-symbols-outlined { display: block; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  min-height: 44px;
+  padding: 8px 14px; border: 1px solid var(--hairline); border-radius: var(--r-sm);
+  background: var(--card); font-size: 13px; color: var(--text-2);
+  display: inline-flex; align-items: center; gap: 6px;
+  transition: border-color .2s, background .2s, color .2s;
+  cursor: pointer;
+}
+.chip:hover { border-color: var(--border-active); }
+.chip.is-selected { background: var(--carbon); border-color: var(--carbon); color: #fff; }
+.chip.is-selected .mono { color: #fff; }
+.chip--add { border-style: dashed; border-color: var(--text-4); color: var(--text-2); font-weight: 500; }
+.chip--add:hover { color: var(--carbon); border-color: var(--carbon); }
+
+/* ============ ПОИСК-КОМБОБОКС ============ */
+.search-container { position: relative; width: 100%; }
+.search-box {
+  display: flex; align-items: center; gap: 8px;
+  height: 44px; padding: 0 14px;
+  background: var(--card); border: 1px solid var(--border-strong);
+  border-radius: var(--r-sm);
+  transition: border-color .2s;
+}
+.search-box:focus-within { border-color: var(--carbon); }
+.search-box .material-symbols-outlined { color: var(--text-4); }
+.search-input {
+  flex: 1; height: 100%; border: none; outline: none;
+  font-family: var(--font); font-size: 13px; color: var(--carbon);
+  background: transparent;
+}
+.search-input::placeholder { color: var(--text-4); }
+.search-dropdown {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 60;
+  max-height: 280px; overflow-y: auto;
+  background: var(--card); border: 1px solid var(--hairline);
+  border-radius: var(--r-md); box-shadow: var(--shadow-modal);
+  padding: 6px 0;
+}
+.search-group-title {
+  padding: 8px 14px 4px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--text-4);
+}
+.search-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 14px; min-height: 44px;
+  font-size: 13px; cursor: pointer;
+  transition: background .15s;
+}
+.search-item:hover, .search-item.is-selected { background: var(--subtle); }
+.search-item-info { display: flex; flex-direction: column; gap: 2px; }
+.search-item-sub { font-size: 11px; color: var(--text-3); }
+
+/* ============ ПЛАШКИ И РУЧНОЙ ВВОД ============ */
+.warning-banner {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 12px 14px; border-radius: var(--r-sm);
+  background: rgba(186, 26, 26, 0.05); border: 1px solid rgba(186, 26, 26, 0.15);
+  font-size: 12px; color: var(--text-2); line-height: 1.45;
+}
+.warning-banner a { text-decoration: underline; text-underline-offset: 3px; color: var(--carbon); font-weight: 500; cursor: pointer; }
+
+.manual-form {
+  background: var(--subtle); border: 1px solid var(--hairline);
+  border-radius: var(--r-md); padding: 18px;
+  display: flex; flex-direction: column; gap: 14px;
+}
+.manual-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (min-width: 640px) { .manual-grid { grid-template-columns: repeat(4, 1fr); } }
+.input-wrap { display: flex; flex-direction: column; gap: 4px; }
+.input-label { font-size: 11px; color: var(--text-3); }
+.form-input, .form-select {
+  height: 44px; padding: 0 12px;
+  border: 1px solid var(--border-strong); border-radius: var(--r-sm);
+  background: var(--card); font-family: var(--mono); font-size: 13px;
+  color: var(--carbon); outline: none; transition: border-color .15s;
+  width: 100%;
+}
+.form-input:focus, .form-select:focus { border-color: var(--carbon); }
+.protocol-hint {
+  font-size: 12px; color: var(--text-3); line-height: 1.45;
+  border-left: 2px solid var(--border-strong); padding-left: 10px;
+}
+
+/* ============ ВИЗУАЛИЗАЦИЯ И SVG ============ */
+.lab-visual { display: flex; flex-direction: column; align-items: center; gap: 24px; padding: 20px; border-radius: var(--r-md); background: var(--subtle); }
+@media (min-width: 768px) { .lab-visual { flex-direction: row; } }
+.lab-svg { width: 220px; height: 250px; flex: none; }
+.lab-data { flex: 1; width: 100%; display: flex; flex-direction: column; gap: 6px; }
+.legend { display: flex; align-items: center; gap: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--hairline); font-size: 12px; }
+.legend-dash { width: 14px; border-top: 2px dashed var(--text-4); }
+.legend-solid { width: 14px; height: 2px; background: var(--carbon); margin-left: 8px; }
+.diff-row { display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--divider); }
+.diff-row > span:first-child { color: var(--text-2); font-size: 13px; }
+.diff-value { font: 500 13px var(--mono); color: var(--carbon); }
+.lab-note { padding-top: 4px; font-size: 12px; line-height: 1.5; color: var(--text-3); }
+
+/* ============ ТАБЛИЦА ВСЕХ РАЗМЕРОВ ============ */
+.table-wrap {
+  width: 100%; overflow-x: auto;
+  border: 1px solid var(--hairline); border-radius: var(--r-md);
+  background: var(--card);
+}
+.size-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 13px; }
+.size-table th {
+  padding: 10px 12px; font-size: 11px; font-weight: 500;
+  letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-3);
+  border-bottom: 1px solid var(--hairline); background: var(--subtle);
+}
+.size-table td {
+  padding: 12px; border-bottom: 1px solid var(--divider);
+  font-family: var(--mono); vertical-align: middle;
+}
+.size-table tr { cursor: pointer; transition: background .15s; }
+.size-table tr:hover { background: rgba(17,17,16,0.02); }
+.size-table tr.is-current-view { outline: 1.5px solid var(--carbon); outline-offset: -1.5px; }
+.size-table tr.is-recommended { background: var(--emerald-soft) !important; }
+.size-table tr.is-out-of-stock {
+  background: repeating-linear-gradient(45deg, transparent, transparent 6px, rgba(17,17,16,0.04) 6px, rgba(17,17,16,0.04) 12px);
+  color: var(--text-4);
+}
+.rec-dot-inline {
+  display: inline-block; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--emerald); margin-right: 6px; vertical-align: middle;
+}
+.diff-cell { font-family: var(--mono); }
+.diff-cell--normal { color: var(--carbon); }
+.diff-cell--warn { color: var(--text-2); }
+.diff-cell--heavy { color: var(--text-2); font-style: italic; }
+.diff-tag {
+  display: inline-block; font-size: 10px; font-style: normal;
+  padding: 1px 4px; border-radius: 2px; background: var(--subtle);
+  margin-left: 4px; color: var(--text-3); font-family: var(--font);
+}
+@media (max-width: 768px) {
+  .col-shoulder { display: none !important; }
+  .modal-panel { padding: 18px 16px; margin: 0; max-height: 94vh; }
+  .size-table th, .size-table td { padding: 10px 8px; font-size: 12px; }
+}
+
+.lab-summary-sentence {
+  padding: 12px 14px; background: var(--subtle); border-radius: var(--r-sm);
+  font-size: 13px; line-height: 1.45; color: var(--text-2);
+}
+
+.modal-foot { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 4px; }
+.btn {
+  flex: none; min-height: 44px; padding: 0 20px; border-radius: var(--r-sm);
+  font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+  transition: background .2s, border-color .2s;
+  cursor: pointer;
+}
+.btn--dark { background: var(--carbon); color: #fff; }
+.btn--dark:hover { background: var(--carbon-hover); }
+.btn--ghost { border: 1px solid var(--border-strong); color: var(--carbon); }
+.btn--ghost:hover { border-color: var(--carbon); background: var(--subtle); }
+
+.review-list > * + * { border-top: 1px solid var(--divider); }
+.review-item { padding: 16px 0; display: flex; flex-direction: column; gap: 6px; }
+.review-item:first-child { padding-top: 0; }
+.review-item:last-child { padding-bottom: 0; }
+.review-meta { display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 13px; }
+
+/* AR */
+.ar-view { position: relative; aspect-ratio: 16 / 9; border-radius: var(--r-sm); overflow: hidden; background: #000; }
+.ar-view img { width: 100%; height: 100%; object-fit: cover; opacity: 0.65; }
+.ar-label {
+  position: absolute; left: 16px; bottom: 16px;
+  padding: 4px 10px; border-radius: var(--r-sm);
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+  color: #fff; font-size: 12px;
+}
+
+/* ============ ФУТЕР ============ */
+.footer { border-top: 1px solid var(--hairline); padding: 48px 0; background: var(--canvas); }
+.footer-inner { display: flex; flex-direction: column; gap: 24px; }
+@media (min-width: 768px) { .footer-inner { flex-direction: row; justify-content: space-between; align-items: center; } }
+.footer-logo { font-size: 14px; font-weight: 600; letter-spacing: -0.02em; text-transform: uppercase; color: var(--carbon); }
+.footer-links { display: flex; flex-wrap: wrap; gap: 24px; font-size: 12px; color: var(--text-3); }
+.footer-links a:hover { color: var(--carbon); }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="container header-inner">
+    <div class="header-left">
+      <a class="logo" href="#">AURA STUDIO</a>
+      <nav class="nav">
+        <a href="#">Men</a>
+        <a href="#">Women</a>
+        <a href="#" aria-current="page">Essentials</a>
+        <a href="#">Atelier</a>
+      </nav>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" aria-label="Поиск"><span class="material-symbols-outlined">search</span></button>
+      <button class="icon-btn" aria-label="Избранное"><span class="material-symbols-outlined">favorite</span></button>
+      <button class="icon-btn" aria-label="Корзина">
+        <span class="material-symbols-outlined">local_mall</span>
+        <span class="badge">1</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <div class="breadcrumbs">
+    <a href="#">Essentials</a><span class="sep">/</span>
+    <a href="#">Трикотаж и худи</a><span class="sep">/</span>
+    <span class="current">Heavyweight Fleece</span>
+  </div>
+
+  <div class="pdp">
+    <!-- ЛЕВАЯ КОЛОНКА -->
+    <div class="gallery">
+      <div class="media media--hero">
+        <img alt="Мужской оверсайз-худи из плотного хлопка графитового оттенка" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnwzwRKi_4n00Mbhw4XMgTMTf8aKVHsagT47SoiJtO23iBN1R2ogva4a3lyL4Ugmug3wkFm14b1QFDxKG2YaFQnlXCj1oHcRz7FrnUORPZ4FVi9upyBcvupUKkGJ49NLWnAEbGZk1fMnEstg2cn2pVVys0fUeq2rOSlihBEeHe7dbcE5cloyNsvdmp46jOl_kEi6UbokdVMmUu_bg-viA_6RfyrFUjRgU0-UAy3eX2HfCWG9Gl4r2t"/>
+        <span class="media-tag">Рост модели: <span class="mono">182 см</span> · размер <span class="mono">M</span></span>
+        <button class="ar-btn" onclick="openModal('ar')"><span class="material-symbols-outlined i-16">view_in_ar</span>Примерить в AR</button>
+      </div>
+
+      <div class="media-grid">
+        <div class="media media--detail">
+          <img alt="Фактура плотного трикотажа 480 GSM с петлёй диагонального плетения" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQKfNKO1m6ehRpPq5nFCQ6T0COt6-I4biZhXlVUTcAc7bTV1EqcyHb68RsGcoIr1t2jpIISBysHotk0gA-jMYp-oTrZKTipnkYMfCB8pwTyzNooRwMqC4NiTEygbUTMnPa9c4n1GTeF6YZWIWf9_PtF2wZjfGFodqv_lac3Fro10wH3lOhEE9GyOr3p0UL8e_Ju1_AVZ478Yi5FqUpU3PAcPlBJruAiIjW4RUucIcOd3p2cJHbSZ-X"/>
+          <span class="media-tag">480 GSM French Terry</span>
+        </div>
+        <div class="media media--detail">
+          <img alt="Вид сзади: архитектурный оверсайз со спущенным плечом" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXjMp4Cro2G180ox2qiXkDKIWtknCcmrNKAZMz71-jqztGOUDMaU-do3k5Lur2ShKt9d8_1_3SHTLZgoeNNdYdFq5VBqYi5jiU5lqjV55_PX8OllddIarHhdfga8FnLKaiGGr7kP9anh8u5d_u_nuu69AywlBWq7PyFpJLpTnwA7uiDY2CMIWqmOJ0RVvOUERkIYr_6awZi-MV_22v9lexG6ld6eVgaNWnmfr-v3mxeaVsC0pc-A1t"/>
+          <span class="media-tag">Линия плеч: спущенная</span>
+        </div>
+      </div>
+
+      <!-- ТАБЫ ПОД ФОТО -->
+      <div class="tabs-wrap">
+        <div class="tabs" role="tablist">
+          <button class="tab is-active" id="nav-btn-desc" onclick="switchSectionTab('desc')">О товаре</button>
+          <button class="tab" id="nav-btn-reviews" onclick="switchSectionTab('reviews')">Отзывы (34)</button>
+          <button class="tab" id="nav-btn-lab" onclick="switchSectionTab('lab')">Лаборатория посадки</button>
+        </div>
+
+        <!-- ТАБ: О ТОВАРЕ -->
+        <div class="tab-panel" id="section-desc">
+          <div class="prose">
+            <p>Архитектурный минималистичный худи плотностью 480 г/м². Выполнен из длинноволокнистого гребенного хлопка санфоризированной обработки, предотвращающей усадку после стирки.</p>
+            <p>Плотная двойная горловина и капюшон анатомической формы сохраняют баланс силуэта без лишних деталей и шнуров. Спущенный крой плеча создает мягкий, структурный оверсайз в скандинавской эстетике.</p>
+          </div>
+          <div class="specs">
+            <div><span class="label">Состав</span><span class="value">100% Хлопок</span></div>
+            <div><span class="label">Плотность</span><span class="value">480 GSM</span></div>
+            <div><span class="label">Производство</span><span class="value">Португалия</span></div>
+          </div>
+        </div>
+
+        <!-- ТАБ: ОТЗЫВЫ -->
+        <div class="tab-panel is-hidden" id="section-reviews">
+          <div class="card card--summary">
+            <div class="row">
+              <span class="strong">ИИ-саммари посадки и ткани <span class="mono muted">34 отзыва</span></span>
+              <span class="muted">Обновлено сегодня</span>
+            </div>
+            <ul class="summary-list">
+              <li><span class="strong">Крой:</span> свободный оверсайз, рукава удлинены на 2 см, манжета держит объём.</li>
+              <li><span class="strong">Ткань:</span> 480 GSM держит форму короба, не садится при 30°C.</li>
+              <li><span class="strong">Размерность:</span> 62% покупателей взяли на размер больше своего обычного.</li>
+            </ul>
+          </div>
+          <div class="review-list">
+            <div class="review-item">
+              <div class="review-meta"><span class="strong">Константин В. <span class="mono muted">182 / 76</span></span><span class="verified"><span class="dot dot--emerald"></span>Проверено</span></div>
+              <p class="review-text">«Село идеально, плечи ровно там, где должны быть. Длина 71 см идеальна на 182 см, рукава не задираются».</p>
+            </div>
+            <div class="review-item">
+              <div class="review-meta"><span class="strong">Михаил С. <span class="mono muted">180 / 74</span></span><span class="verified"><span class="dot dot--emerald"></span>Проверено</span></div>
+              <p class="review-text">«Тяжесть и плотность без грубости. Цвет мокрого асфальта благородный. Крой более архитектурный, чем у обычных худи».</p>
+            </div>
+          </div>
+          <div><button class="text-link" onclick="openModal('all-reviews')">Все отзывы (34) →</button></div>
+        </div>
+
+        <!-- ТАБ: ЛАБОРАТОРИЯ ПОСАДКИ В КАРТОЧКЕ -->
+        <div class="tab-panel is-hidden" id="section-lab">
+          <div class="card card--lab">
+            <div class="lab-head">
+              <div>
+                <span class="muted">Эталонная вещь в сравнении:</span>
+                <div class="lab-title" id="tab-lab-ref-name">Худи Nike Club Fleece (M)</div>
+              </div>
+              <span class="pill pill--emerald" id="tab-lab-pill"><span class="dot dot--emerald"></span>Aura <span class="mono" id="tab-lab-rec-size">M</span> — рекомендовано</span>
+            </div>
+            <div class="metrics">
+              <div class="metric"><span class="label">Ширина по груди</span><span class="metric-value" id="tab-metric-chest">+2.9 см</span><span class="metric-ref" id="tab-ref-chest">62 vs 59.1</span></div>
+              <div class="metric"><span class="label">Длина по спинке</span><span class="metric-value" id="tab-metric-len">+1.8 см</span><span class="metric-ref" id="tab-ref-len">71 vs 69.2</span></div>
+              <div class="metric"><span class="label">Длина рукава</span><span class="metric-value" id="tab-metric-sleeve">+3.3 см</span><span class="metric-ref" id="tab-ref-sleeve">93.5 vs 90.2</span></div>
+            </div>
+            <div class="row" style="padding-top:4px">
+              <button class="text-link text-link--quiet" onclick="openModal('fit-lab')">Открыть интерактивное наложение лекал →</button>
+              <span class="muted" id="tab-lab-accuracy">Точность <span class="mono">88%</span> (оценка по обмерам)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ПРАВАЯ КОЛОНКА -->
+    <div class="buy">
+      <div class="buy-head">
+        <div class="row muted">
+          <span>Atelier 04 · FW25</span>
+          <span style="color:var(--text-2)">В наличии · <span class="mono">14</span> шт</span>
+        </div>
+        <h1 class="title">Heavyweight Fleece Hoodie</h1>
+        <div class="price-row">
+          <span class="price">14 900 ₽</span>
+          <span class="price-old">18 500 ₽</span>
+          <span class="discount">−20%</span>
+        </div>
+      </div>
+
+      <!-- Цвет -->
+      <div class="field">
+        <div class="field-head">
+          <span>Оттенок: <span class="strong" id="color-label">Графит</span></span>
+          <span class="mono" style="font-size:11px;color:var(--text-4)">01 / 03</span>
+        </div>
+        <div class="swatches">
+          <button aria-label="Графит" class="swatch is-selected" style="background:#2F3235" onclick="selectColor('Графит', this)"></button>
+          <button aria-label="Угольный" class="swatch" style="background:#1A1A1A" onclick="selectColor('Угольный', this)"></button>
+          <button aria-label="Светло-пепельный" class="swatch swatch--light" style="background:#EAE6DF" onclick="selectColor('Светло-пепельный', this)"></button>
+        </div>
+      </div>
+
+      <!-- Размер -->
+      <div class="field">
+        <div class="field-head">
+          <span>Размер</span>
+          <button class="text-link text-link--sm" onclick="switchSectionTab('reviews')">Отзывы о размере</button>
+        </div>
+        <div class="size-grid" id="main-size-grid">
+          <button class="size-btn" id="size-btn-XS" onclick="chooseSize('XS', this)">XS</button>
+          <button class="size-btn" id="size-btn-S" onclick="chooseSize('S', this)">S</button>
+          <button class="size-btn is-selected is-recommended" id="size-btn-M" onclick="chooseSize('M', this)">M<span class="rec-dot"></span></button>
+          <button class="size-btn" id="size-btn-L" onclick="chooseSize('L', this)">L</button>
+          <button class="size-btn" id="size-btn-XL" disabled aria-label="XL — нет в наличии">XL</button>
+        </div>
+      </div>
+
+      <!-- Fit-виджет -->
+      <div class="fit">
+        <div class="row">
+          <div class="row-start">
+            <span class="dot dot--emerald" id="fit-status-dot"></span>
+            <span class="fit-title" id="fit-summary-text">Сравните с вещью, которая у вас есть</span>
+          </div>
+          <span class="fit-tag" id="fit-accuracy-tag">Fit Engine</span>
+        </div>
+
+        <div class="scale">
+          <div class="scale-labels"><span>Маломерит</span><span>Истинная посадка</span><span>Большемерит</span></div>
+          <div class="scale-track">
+            <div class="scale-center"></div>
+            <div class="scale-thumb" id="fit-scale-thumb" style="left:50%"></div>
+          </div>
+          <p class="muted" id="fit-sub-note"><span class="mono">62%</span> покупателей взяли на размер больше</p>
+        </div>
+
+        <div class="alert is-hidden" id="size-alert-box">
+          <span class="material-symbols-outlined i-16">info</span>
+          <span id="size-alert-text"></span>
+        </div>
+
+        <div class="fit-actions">
+          <button class="action-btn" onclick="openModal('fit-lab')"><span class="material-symbols-outlined i-16">straighten</span><span class="underline">Сравнить с моими вещами</span></button>
+          <button class="action-btn" onclick="openModal('ar')"><span class="material-symbols-outlined i-16">view_in_ar</span>Примерить в AR</button>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-wrap">
+        <button class="btn-primary" id="add-btn">
+          <span>Добавить в корзину · <span id="add-size">M</span></span>
+          <span class="mono">14 900 ₽</span>
+        </button>
+        <div class="delivery"><span class="material-symbols-outlined i-16">local_shipping</span>Доставка с примеркой курьером · Москва, 1–2 дня</div>
+      </div>
+
+      <!-- Аккордеоны -->
+      <div class="accordion">
+        <details>
+          <summary>Материал и уход<span class="material-symbols-outlined i-18">expand_more</span></summary>
+          <div class="accordion-body">Машинная стирка наизнанку при 30°C. Не сушить в барабане. Санфоризированный трикотаж исключает усадку.</div>
+        </details>
+        <details>
+          <summary>Доставка и возврат<span class="material-symbols-outlined i-18">expand_more</span></summary>
+          <div class="accordion-body">Бесплатная примерка до 15 минут в Москве и Санкт-Петербурге. Возврат в 1 клик через личный кабинет.</div>
+        </details>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- МОДАЛКА: ЛАБОРАТОРИЯ ПОСАДКИ -->
+<div class="modal" id="modal-fit-lab" onclick="backdropClose(event, 'fit-lab')">
+  <div class="modal-panel">
+    <div class="modal-head">
+      <div>
+        <span class="muted">Лаборатория посадки · Сравнение лекал</span>
+        <h3 class="modal-title">AURA STUDIO (<span id="lab-active-size-title">M</span>) vs <span id="lab-ref-title">Вещь из гардероба</span></h3>
+      </div>
+      <button class="close-btn" onclick="closeModal('fit-lab')" aria-label="Закрыть"><span class="material-symbols-outlined i-22">close</span></button>
+    </div>
+
+    <!-- Сохранённые вещи из гардероба (localStorage) -->
+    <div class="field" style="gap:8px" id="wardrobe-section">
+      <span class="muted">Ваш гардероб (сохранённые эталоны)</span>
+      <div class="chips" id="wardrobe-chips">
+        <!-- Генерируется из aura.wardrobe.v1 -->
+      </div>
+    </div>
+
+    <!-- Поиск и выбор модели из базы -->
+    <div class="field" style="gap:8px">
+      <div class="row">
+        <span class="muted">Найти вещь в базе или добавить свою</span>
+        <button class="text-link text-link--sm" id="btn-toggle-manual" onclick="toggleManualForm()">+ Добавить вещь вручную</button>
+      </div>
+
+      <div class="search-container">
+        <div class="search-box">
+          <span class="material-symbols-outlined">search</span>
+          <input type="text" class="search-input" id="garment-search-input" placeholder="Поиск по бренду и модели (например: Nike, H&amp;M, O'STIN, Zara)..." autocomplete="off"/>
+          <button class="close-btn is-hidden" id="search-clear-btn" onclick="clearGarmentSearch()" aria-label="Очистить"><span class="material-symbols-outlined i-16">close</span></button>
+        </div>
+        <div class="search-dropdown is-hidden" id="garment-search-dropdown">
+          <!-- Группировка: худи / свитшоты / свитеры -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Панель формы ручного ввода -->
+    <div class="manual-form is-hidden" id="manual-form-wrap">
+      <div class="row">
+        <span class="strong">Ручной ввод обмеров вещи</span>
+        <button class="close-btn" onclick="toggleManualForm(false)"><span class="material-symbols-outlined i-16">close</span></button>
+      </div>
+      <div class="manual-grid">
+        <div class="input-wrap">
+          <label class="input-label" for="manual-chest">Грудь (полуобхват), см</label>
+          <input type="number" step="0.5" id="manual-chest" class="form-input" placeholder="59.0"/>
+        </div>
+        <div class="input-wrap">
+          <label class="input-label" for="manual-length">Длина по спинке, см</label>
+          <input type="number" step="0.5" id="manual-length" class="form-input" placeholder="69.0"/>
+        </div>
+        <div class="input-wrap">
+          <label class="input-label" for="manual-sleeve">Рукав от горловины, см</label>
+          <input type="number" step="0.5" id="manual-sleeve" class="form-input" placeholder="90.0"/>
+        </div>
+        <div class="input-wrap">
+          <label class="input-label" for="manual-shoulder">Плечи (от шва), см</label>
+          <input type="number" step="0.5" id="manual-shoulder" class="form-input" placeholder="47.0"/>
+        </div>
+      </div>
+      <div class="manual-grid">
+        <div class="input-wrap">
+          <label class="input-label" for="manual-fit">Посадка</label>
+          <select id="manual-fit" class="form-select">
+            <option value="regular" selected>Обычная (regular)</option>
+            <option value="slim">Приталенная (slim)</option>
+            <option value="relaxed">Свободная (relaxed)</option>
+            <option value="oversize">Оверсайз (oversize)</option>
+          </select>
+        </div>
+        <div class="input-wrap">
+          <label class="input-label" for="manual-shoulder-type">Тип плечевого шва</label>
+          <select id="manual-shoulder-type" class="form-select">
+            <option value="set_in" selected>Втачной (set_in)</option>
+            <option value="drop">Спущенный (drop)</option>
+            <option value="raglan">Реглан (raglan)</option>
+          </select>
+        </div>
+        <div class="input-wrap" style="grid-column: span 2; display: flex; align-items: flex-end;">
+          <button class="btn btn--dark" style="width:100%" onclick="saveManualGarment()">Применить и сохранить</button>
+        </div>
+      </div>
+      <div class="protocol-hint" id="protocol-hint-text">
+        <strong>Как измерить:</strong> Разложите вещь плоско. Ширина — от подмышки до подмышки. Длина — от высшей точки плеча у горловины до низа. Рукав — от центра горловины сзади через плечо до конца манжеты.
+      </div>
+    </div>
+
+    <!-- Выбранный эталон: значок уверенности, плашка и чипы его размеров -->
+    <div class="field" style="gap:10px" id="selected-garment-bar">
+      <div class="row">
+        <div class="row-start">
+          <span class="strong" id="ref-model-display">Nike Club Fleece Crew</span>
+          <span class="pill pill--emerald" id="ref-confidence-pill">Обмеры бренда</span>
+        </div>
+        <span class="muted" id="ref-meta-info">regular · raglan</span>
+      </div>
+
+      <!-- Плашка при оценочных данных (estimated) -->
+      <div class="warning-banner is-hidden" id="estimated-warning-banner">
+        <span class="material-symbols-outlined i-16" style="color:var(--text-3);margin-top:1px">info</span>
+        <span>Обмеры этой модели примерные. Для точного результата <a onclick="toggleManualForm(true)">измерьте свою вещь</a>.</span>
+      </div>
+
+      <!-- Чипы размеров эталона -->
+      <div class="chips" id="ref-sizes-chips">
+        <!-- Генерируются размеры выбранного эталона -->
+      </div>
+    </div>
+
+    <!-- SVG НАЛОЖЕНИЕ ЛЕКАЛ -->
+    <div class="lab-visual">
+      <svg class="lab-svg" id="lab-svg-element" viewBox="0 0 220 250">
+        <!-- Рисуется динамически в renderSvgOverlay() -->
+      </svg>
+      <div class="lab-data">
+        <div class="legend">
+          <span class="legend-dash"></span><span class="muted" id="lab-legend-ref">Эталон</span>
+          <span class="legend-solid"></span><span class="strong" id="lab-legend-prod">Aura Studio</span>
+        </div>
+        <div class="diff-row">
+          <span>Ширина по груди (полуобхват)</span>
+          <span class="diff-value" id="lab-diff-chest">+0.0 см</span>
+        </div>
+        <div class="diff-row">
+          <span>Длина по спинке</span>
+          <span class="diff-value" id="lab-diff-len">+0.0 см</span>
+        </div>
+        <div class="diff-row">
+          <span>Длина рукава от центра спинки</span>
+          <span class="diff-value" id="lab-diff-sleeve">+0.0 см</span>
+        </div>
+        <div class="diff-row">
+          <span>Ширина плеч</span>
+          <span class="diff-value" id="lab-diff-shoulder">—</span>
+        </div>
+        <p class="lab-note" id="lab-note">Выберите размер в таблице ниже для детального просмотра различий кроя.</p>
+      </div>
+    </div>
+
+    <!-- ИНТЕРАКТИВНАЯ ТАБЛИЦА ВСЕХ РАЗМЕРОВ -->
+    <div class="field" style="gap:8px">
+      <div class="row">
+        <span class="strong">Сравнение со всеми размерами AURA</span>
+        <span class="muted">Кликните на строку для просмотра</span>
+      </div>
+      <div class="table-wrap">
+        <table class="size-table" id="all-sizes-table">
+          <thead>
+            <tr>
+              <th>Размер</th>
+              <th>Грудь</th>
+              <th>Длина</th>
+              <th>Рукав</th>
+              <th class="col-shoulder">Плечи</th>
+              <th>Совпадение</th>
+            </tr>
+          </thead>
+          <tbody id="sizes-table-body">
+            <!-- Строки XS, S, M, L, XL -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Вывод одной строкой по наибольшему отклонению -->
+    <div class="lab-summary-sentence" id="lab-summary-sentence">
+      Расчёт параметров посадки...
+    </div>
+
+    <!-- Футер модалки -->
+    <div class="modal-foot">
+      <span class="muted" id="modal-foot-info">Оценка по обмерам изделия</span>
+      <button class="btn btn--dark" id="btn-select-size-and-close" onclick="applyLabSizeSelection()">Выбрать размер M и закрыть</button>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛКА: ОТЗЫВЫ -->
+<div class="modal" id="modal-all-reviews" onclick="backdropClose(event, 'all-reviews')">
+  <div class="modal-panel" style="max-height:85vh">
+    <div class="modal-head">
+      <div>
+        <span class="muted">Подтверждённые покупки</span>
+        <h3 class="modal-title">Отзывы покупателей <span class="mono" style="font-size:16px;color:var(--text-3)">34</span></h3>
+      </div>
+      <button class="close-btn" onclick="closeModal('all-reviews')" aria-label="Закрыть"><span class="material-symbols-outlined i-22">close</span></button>
+    </div>
+    <div class="review-list">
+      <div class="review-item">
+        <div class="review-meta"><span class="strong">Константин В. <span class="mono muted">182 / 76</span></span><span class="muted">Размер <span class="mono">M</span> · <span class="mono">5/5</span></span></div>
+        <p class="review-text">«Село идеально, плечи ровно там, где должны быть. Длина идеальна на 182 см, рукава не задираются».</p>
+      </div>
+      <div class="review-item">
+        <div class="review-meta"><span class="strong">Михаил С. <span class="mono muted">180 / 74</span></span><span class="muted">Размер <span class="mono">M</span> · <span class="mono">5/5</span></span></div>
+        <p class="review-text">«Качество полотна невероятное — ощущается тяжесть и плотность ткани без грубости. Мокрый асфальт».</p>
+      </div>
+      <div class="review-item">
+        <div class="review-meta"><span class="strong">Артём П. <span class="mono muted">176 / 70</span></span><span class="muted">Размер <span class="mono">S</span> · <span class="mono">4/5</span></span></div>
+        <p class="review-text">«Взял S. Село плотно, если хотите оверсайз как на фото модели — однозначно берите M».</p>
+      </div>
+      <div class="review-item">
+        <div class="review-meta"><span class="strong">Дмитрий К. <span class="mono muted">188 / 82</span></span><span class="muted">Размер <span class="mono">L</span> · <span class="mono">5/5</span></span></div>
+        <p class="review-text">«На рост 188 см размер L сел образцово. Плотный капюшон отлично держит форму».</p>
+      </div>
+    </div>
+    <div style="text-align:right;padding-top:8px">
+      <button class="btn btn--ghost" onclick="closeModal('all-reviews')">Закрыть</button>
+    </div>
+  </div>
+</div>
+
+<!-- МОДАЛКА: AR -->
+<div class="modal" id="modal-ar" onclick="backdropClose(event, 'ar')">
+  <div class="modal-panel modal-panel--sm">
+    <div class="modal-head">
+      <div>
+        <span class="muted">AR-примерка</span>
+        <h3 class="modal-title">Виртуальная примерка силуэта</h3>
+      </div>
+      <button class="close-btn" onclick="closeModal('ar')" aria-label="Закрыть"><span class="material-symbols-outlined i-22">close</span></button>
+    </div>
+    <div class="ar-view">
+      <img alt="Окно AR-примерки" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAxNtCjB3Rkb5lRbnnhklbgpkvkSv5A9LBntrjIOGgE7pNJBvRYwc60ygju0OMVpWJF2-mEL0DxLHZgn3xAvxR_ITZ_HzuxQpHzWsHCfAbD9rYoMa4DyeQ-0YdGDCa0Bt852ioKgY7cDaTEsM3Nb2jVwctFCVaWNQuJVDLWZzj5fABzJviWP2-Nc2_wSFKmhfaab-hDbDxiIVQ5nODMOSw2Xlq_AjMuiYN-tdbYjLwfR8ZUsJNZitQB"/>
+      <span class="ar-label">Размер <span class="mono" id="ar-size-label">M</span> · рост <span class="mono">182 см</span></span>
+    </div>
+    <div class="modal-foot">
+      <span class="muted">Показывает силуэт и длину; точную посадку смотрите в сравнении с вашими вещами.</span>
+      <button class="btn btn--dark" onclick="closeModal('ar')">Готово</button>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div>
+      <div class="footer-logo">AURA STUDIO</div>
+      <p class="muted">Премиальный трикотаж и цифровые лекала.</p>
+    </div>
+    <div class="footer-links">
+      <a href="#">Сервис примерки</a>
+      <a href="#">Таблица обмеров</a>
+      <a href="#">Поддержка</a>
+      <span style="color:var(--text-4)">© 2025 AURA</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ============ СОСТОЯНИЕ ПРИЛОЖЕНИЯ ============
+  const STORAGE_KEY = 'aura.wardrobe.v1';
+  let currentSelectedSize = 'M';
+  let activeRefGarment = null;
+  let activeRefSizeKey = 'M';
+  let activeLabViewingSize = 'M';
+  let currentEvaluation = null;
+  let dynamicSizeHints = {};
+
+  // ============ УТИЛИТЫ ХРАНИЛИЩА (LOCALSTORAGE) ============
+  function loadWardrobeFromStorage() {
+    try {
+      const data = localStorage.getItem(STORAGE_KEY);
+      if (data) {
+        const parsed = JSON.parse(data);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch (e) {
+      console.warn('LocalStorage недоступен, используется локальная сессия:', e);
+    }
+    return [];
+  }
+
+  function saveWardrobeToStorage(list) {
+    try {
+      const trimmed = list.slice(0, 5);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(trimmed));
+    } catch (e) {
+      console.warn('Не удалось сохранить эталон в LocalStorage:', e);
+    }
+  }
+
+  function addGarmentToWardrobe(refGarment, sizeKey) {
+    let list = loadWardrobeFromStorage();
+    const entryId = refGarment.id;
+    // Удаляем дубликат этой модели и размера
+    list = list.filter(item => !(item.id === entryId && item.size === sizeKey));
+    list.unshift({
+      id: entryId,
+      size: sizeKey,
+      customGarment: refGarment.confidence === 'user' ? refGarment : null,
+      timestamp: Date.now()
+    });
+    saveWardrobeToStorage(list);
+    renderWardrobeChips();
+  }
+
+  // ============ ТАБЫ ============
+  function switchSectionTab(tab) {
+    ['desc', 'reviews', 'lab'].forEach(t => {
+      const el = document.getElementById(`section-${t}`);
+      const btn = document.getElementById(`nav-btn-${t}`);
+      if (el) el.classList.toggle('is-hidden', t !== tab);
+      if (btn) btn.classList.toggle('is-active', t === tab);
+    });
+  }
+
+  // ============ ВЫБОР ЦВЕТА ============
+  function selectColor(name, btn) {
+    const lbl = document.getElementById('color-label');
+    if (lbl) lbl.textContent = name;
+    btn.parentElement.querySelectorAll('.swatch').forEach(b => b.classList.remove('is-selected'));
+    btn.classList.add('is-selected');
+  }
+
+  // ============ МОДАЛКИ ============
+  function openModal(id) {
+    const el = document.getElementById(`modal-${id}`);
+    if (el) {
+      el.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      if (id === 'fit-lab') {
+        renderLabModal();
+      }
+    }
+  }
+
+  function closeModal(id) {
+    const el = document.getElementById(`modal-${id}`);
+    if (el) {
+      el.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  function backdropClose(e, id) {
+    if (e.target === e.currentTarget) closeModal(id);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') ['fit-lab', 'all-reviews', 'ar'].forEach(closeModal);
+  });
+
+  // ============ ЛОГИКА ВЫБОРА РАЗМЕРА В КАРТОЧКЕ ============
+  function chooseSize(size, btn) {
+    currentSelectedSize = size;
+    activeLabViewingSize = size;
+
+    document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('is-selected'));
+    if (btn) {
+      btn.classList.add('is-selected');
+    } else {
+      const b = document.getElementById(`size-btn-${size}`);
+      if (b) b.classList.add('is-selected');
+    }
+
+    const addSizeEl = document.getElementById('add-size');
+    if (addSizeEl) addSizeEl.textContent = size;
+    const arSizeLabel = document.getElementById('ar-size-label');
+    if (arSizeLabel) arSizeLabel.textContent = size;
+
+    updateCardFitWidget();
+  }
+
+  // ============ ПОИСК В БАЗЕ GARMENTS ============
+  function setupGarmentSearch() {
+    const input = document.getElementById('garment-search-input');
+    const dropdown = document.getElementById('garment-search-dropdown');
+    const clearBtn = document.getElementById('search-clear-btn');
+
+    if (!input || !dropdown) return;
+
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      clearBtn.classList.toggle('is-hidden', !q);
+
+      if (!q) {
+        dropdown.classList.add('is-hidden');
+        return;
+      }
+
+      const db = window.GARMENTS_DB;
+      if (!db || !db.garments) return;
+
+      const filtered = db.garments.filter(g => {
+        const full = `${g.brand} ${g.model}`.toLowerCase();
+        return full.includes(q);
+      });
+
+      renderSearchResults(filtered);
+    });
+
+    // Закрытие дропдауна при клике вне
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.search-container')) {
+        dropdown.classList.add('is-hidden');
+      }
+    });
+  }
+
+  function clearGarmentSearch() {
+    const input = document.getElementById('garment-search-input');
+    const dropdown = document.getElementById('garment-search-dropdown');
+    const clearBtn = document.getElementById('search-clear-btn');
+    if (input) input.value = '';
+    if (clearBtn) clearBtn.classList.add('is-hidden');
+    if (dropdown) dropdown.classList.add('is-hidden');
+  }
+
+  function renderSearchResults(items) {
+    const dropdown = document.getElementById('garment-search-dropdown');
+    if (!dropdown) return;
+
+    dropdown.innerHTML = '';
+    if (items.length === 0) {
+      dropdown.innerHTML = `<div class="search-item" style="color:var(--text-4);cursor:default">Ничего не найдено. Нажмите «+ Добавить вещь вручную».</div>`;
+      dropdown.classList.remove('is-hidden');
+      return;
+    }
+
+    const categories = {
+      hoodie: 'Худи',
+      zip_hoodie: 'Худи на молнии',
+      sweatshirt: 'Свитшоты',
+      sweater: 'Свитеры'
+    };
+
+    const grouped = {};
+    items.forEach(item => {
+      const cat = item.category || 'other';
+      if (!grouped[cat]) grouped[cat] = [];
+      grouped[cat].push(item);
+    });
+
+    for (const [catKey, groupItems] of Object.entries(grouped)) {
+      const header = document.createElement('div');
+      header.className = 'search-group-title';
+      header.textContent = categories[catKey] || 'Другое';
+      dropdown.appendChild(header);
+
+      groupItems.forEach(item => {
+        const row = document.createElement('div');
+        row.className = 'search-item';
+        row.innerHTML = `
+          <div class="search-item-info">
+            <span class="strong">${item.brand} ${item.model}</span>
+            <span class="search-item-sub">${item.fit} · ${item.shoulder_type === 'drop' ? 'спущенное плечо' : (item.shoulder_type === 'raglan' ? 'реглан' : 'втачной')}</span>
+          </div>
+          <span class="pill ${item.confidence === 'verified' ? 'pill--emerald' : (item.confidence === 'partial' ? 'pill--indigo' : 'pill--neutral')}">
+            ${item.confidence === 'verified' ? 'Обмеры бренда' : (item.confidence === 'partial' ? 'Частично' : 'Оценка')}
+          </span>
+        `;
+        row.addEventListener('click', () => {
+          selectGarmentModel(item);
+          dropdown.classList.add('is-hidden');
+          clearGarmentSearch();
+        });
+        dropdown.appendChild(row);
+      });
+    }
+
+    dropdown.classList.remove('is-hidden');
+  }
+
+  // ============ ВЫБОР МОДЕЛИ ЭТАЛОНА ============
+  function selectGarmentModel(garment, preferredSize) {
+    activeRefGarment = garment;
+    const sizeKeys = Object.keys(garment.sizes || {});
+    // Выбираем переданный preferredSize, иначе 'M', иначе первый доступный
+    if (preferredSize && garment.sizes[preferredSize]) {
+      activeRefSizeKey = preferredSize;
+    } else if (garment.sizes['M']) {
+      activeRefSizeKey = 'M';
+    } else if (sizeKeys.length > 0) {
+      activeRefSizeKey = sizeKeys[0];
+    }
+
+    addGarmentToWardrobe(activeRefGarment, activeRefSizeKey);
+    renderSelectedGarmentBar();
+    recalculateFit();
+  }
+
+  function renderSelectedGarmentBar() {
+    if (!activeRefGarment) return;
+
+    const nameEl = document.getElementById('ref-model-display');
+    const pillEl = document.getElementById('ref-confidence-pill');
+    const metaEl = document.getElementById('ref-meta-info');
+    const warnEl = document.getElementById('estimated-warning-banner');
+    const chipsEl = document.getElementById('ref-sizes-chips');
+
+    if (nameEl) nameEl.textContent = `${activeRefGarment.brand} ${activeRefGarment.model}`;
+
+    const conf = activeRefGarment.confidence || 'verified';
+    if (pillEl) {
+      pillEl.className = 'pill ' + (conf === 'verified' || conf === 'user' ? 'pill--emerald' : (conf === 'partial' ? 'pill--indigo' : 'pill--neutral'));
+      pillEl.textContent = (conf === 'verified' || conf === 'user') ? 'Обмеры бренда' : (conf === 'partial' ? 'Частично' : 'Оценка');
+    }
+
+    if (metaEl) {
+      const shoulderRu = activeRefGarment.shoulder_type === 'drop' ? 'спущенное плечо' : (activeRefGarment.shoulder_type === 'raglan' ? 'реглан' : 'втачное плечо');
+      metaEl.textContent = `${activeRefGarment.fit} · ${shoulderRu}`;
+    }
+
+    if (warnEl) {
+      warnEl.classList.toggle('is-hidden', conf !== 'estimated');
+    }
+
+    if (chipsEl) {
+      chipsEl.innerHTML = '';
+      const sizes = activeRefGarment.sizes || {};
+      for (const [sKey, sData] of Object.entries(sizes)) {
+        const btn = document.createElement('button');
+        btn.className = `chip ${sKey === activeRefSizeKey ? 'is-selected' : ''}`;
+        btn.innerHTML = `${sKey} <span class="mono muted">(${sData.ru || '—'})</span>`;
+        btn.onclick = () => {
+          activeRefSizeKey = sKey;
+          addGarmentToWardrobe(activeRefGarment, activeRefSizeKey);
+          renderSelectedGarmentBar();
+          recalculateFit();
+        };
+        chipsEl.appendChild(btn);
+      }
+    }
+
+    const labRefTitle = document.getElementById('lab-ref-title');
+    if (labRefTitle) labRefTitle.textContent = `${activeRefGarment.brand} (${activeRefSizeKey})`;
+  }
+
+  // ============ РЕНДЕР ЧИПОВ ГАРДЕРОБА ============
+  function renderWardrobeChips() {
+    const container = document.getElementById('wardrobe-chips');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const list = loadWardrobeFromStorage();
+    const db = window.GARMENTS_DB;
+
+    if (list.length === 0) {
+      const emptyNote = document.createElement('span');
+      emptyNote.className = 'muted';
+      emptyNote.textContent = 'Здесь появятся выбранные вами вещи (до 5 моделей).';
+      container.appendChild(emptyNote);
+      return;
+    }
+
+    list.forEach(entry => {
+      let g = null;
+      if (entry.customGarment) {
+        g = entry.customGarment;
+      } else if (db && db.garments) {
+        g = db.garments.find(item => item.id === entry.id);
+      }
+      if (!g) return;
+
+      const isCurrent = activeRefGarment && activeRefGarment.id === g.id && activeRefSizeKey === entry.size;
+      const btn = document.createElement('button');
+      btn.className = `chip ${isCurrent ? 'is-selected' : ''}`;
+      btn.innerHTML = `${g.brand} ${g.model} · <span class="mono">${entry.size}</span>`;
+      btn.onclick = () => {
+        selectGarmentModel(g, entry.size);
+      };
+      container.appendChild(btn);
+    });
+  }
+
+  // ============ РУЧНОЙ ВВОД ВЕЩИ ============
+  function toggleManualForm(show) {
+    const wrap = document.getElementById('manual-form-wrap');
+    if (!wrap) return;
+    const shouldShow = show !== undefined ? show : wrap.classList.contains('is-hidden');
+    wrap.classList.toggle('is-hidden', !shouldShow);
+    if (shouldShow) {
+      document.getElementById('manual-chest').focus();
+    }
+  }
+
+  function saveManualGarment() {
+    const chest = parseFloat(document.getElementById('manual-chest').value);
+    const length = parseFloat(document.getElementById('manual-length').value);
+    const sleeve = parseFloat(document.getElementById('manual-sleeve').value);
+    const shoulder = parseFloat(document.getElementById('manual-shoulder').value);
+    const fit = document.getElementById('manual-fit').value || 'regular';
+    const shoulderType = document.getElementById('manual-shoulder-type').value || 'set_in';
+
+    if (isNaN(chest) || isNaN(length) || isNaN(sleeve)) {
+      alert('Пожалуйста, укажите как минимум ширину груди, длину по спинке и рукав.');
+      return;
+    }
+
+    const customGarment = {
+      id: 'custom-' + Date.now(),
+      brand: 'Мой замер',
+      model: `${chest}×${length} см`,
+      category: 'hoodie',
+      fit: fit,
+      shoulder_type: shoulderType,
+      confidence: 'user',
+      estimated_fields: [],
+      sizes: {
+        'Свой': {
+          ru: 'индив.',
+          chest_half: chest,
+          length_back: length,
+          sleeve_cb: sleeve,
+          shoulder: isNaN(shoulder) ? null : shoulder
+        }
+      }
+    };
+
+    toggleManualForm(false);
+    selectGarmentModel(customGarment, 'Свой');
+  }
+
+  // ============ ПЕРЕСЧЁТ FIT ENGINE ============
+  function recalculateFit() {
+    const db = window.GARMENTS_DB;
+    if (!db || !db.product || !activeRefGarment || !window.FitEngine) return;
+
+    currentEvaluation = FitEngine.evaluateAllSizes(db.product, activeRefGarment, activeRefSizeKey);
+    if (!currentEvaluation) return;
+
+    dynamicSizeHints = FitEngine.generateDynamicSizeHints(currentEvaluation, db.product, activeRefGarment);
+
+    // Если текущий просматриваемый размер ещё не выбран, ставим рекомендованный
+    if (!activeLabViewingSize) {
+      activeLabViewingSize = currentEvaluation.recommendedSize;
+    }
+
+    renderSizesTable();
+    updateViewingSizeDiffs();
+    renderSvgOverlay();
+    updateCardFitWidget();
+    updateTabLabBlock();
+  }
+
+  // ============ РЕНДЕР ТАБЛИЦЫ РАЗМЕРОВ ============
+  function renderSizesTable() {
+    const tbody = document.getElementById('sizes-table-body');
+    if (!tbody || !currentEvaluation) return;
+
+    tbody.innerHTML = '';
+    const db = window.GARMENTS_DB;
+    const sizes = ['XS', 'S', 'M', 'L', 'XL'];
+
+    sizes.forEach(sizeKey => {
+      const res = currentEvaluation.results[sizeKey];
+      const pSize = db.product.sizes[sizeKey];
+      const isRec = sizeKey === currentEvaluation.recommendedSize;
+      const isActive = sizeKey === activeLabViewingSize;
+      const inStock = pSize ? pSize.in_stock !== false : true;
+
+      const tr = document.createElement('tr');
+      let trClass = [];
+      if (isActive) trClass.push('is-current-view');
+      if (isRec) trClass.push('is-recommended');
+      if (!inStock) trClass.push('is-out-of-stock');
+      tr.className = trClass.join(' ');
+
+      function formatCell(field, tol) {
+        if (!res || res.delta[field] === null || res.delta[field] === undefined) return '<span class="muted">—</span>';
+        const d = res.delta[field];
+        const sign = d > 0 ? `+${d.toFixed(1)}` : (d < 0 ? `${d.toFixed(1)}` : '0.0');
+        const diffFromExp = Math.abs(res.diffFromExp[field] || 0);
+
+        let cellClass = 'diff-cell--normal';
+        let tag = '';
+        if (diffFromExp > 2 * tol) {
+          cellClass = 'diff-cell--heavy';
+          tag = `<span class="diff-tag">${d >= 0 ? 'свободнее' : 'теснее'}</span>`;
+        } else if (diffFromExp > tol) {
+          cellClass = 'diff-cell--warn';
+        }
+
+        return `<span class="diff-cell ${cellClass}">${sign}</span>${tag}`;
+      }
+
+      const chestCell = formatCell('chest_half', 2.0);
+      const lenCell = formatCell('length_back', 2.0);
+      const sleeveCell = formatCell('sleeve_cb', 2.5);
+      const shoulderCell = formatCell('shoulder', 2.0);
+
+      const matchText = inStock ? `${res.match}%` : '<span class="muted" style="font-size:11px">нет в наличии</span>';
+
+      tr.innerHTML = `
+        <td>
+          ${isRec ? '<span class="rec-dot-inline" title="Рекомендованный размер"></span>' : ''}
+          <span class="strong">${sizeKey}</span>
+          ${isRec ? '<span class="pill pill--emerald" style="padding:1px 6px;font-size:10px;margin-left:4px">Лучший</span>' : ''}
+        </td>
+        <td>${chestCell}</td>
+        <td>${lenCell}</td>
+        <td>${sleeveCell}</td>
+        <td class="col-shoulder">${shoulderCell}</td>
+        <td><span class="strong">${matchText}</span></td>
+      `;
+
+      tr.onclick = () => {
+        activeLabViewingSize = sizeKey;
+        renderSizesTable();
+        updateViewingSizeDiffs();
+        renderSvgOverlay();
+      };
+
+      tbody.appendChild(tr);
+    });
+
+    // Резюме одной строкой
+    const sentenceEl = document.getElementById('lab-summary-sentence');
+    if (sentenceEl && currentEvaluation) {
+      const summaryText = FitEngine.generateSummaryLine(activeLabViewingSize, currentEvaluation, db.product, activeRefGarment);
+      sentenceEl.innerHTML = `<span class="material-symbols-outlined i-16" style="color:var(--text-3)">lightbulb</span><span>${summaryText}</span>`;
+    }
+
+    // Обновляем кнопку в футере модалки
+    const footerBtn = document.getElementById('btn-select-size-and-close');
+    if (footerBtn) {
+      footerBtn.textContent = `Выбрать размер ${activeLabViewingSize} и закрыть`;
+    }
+  </div>
+
+  // ============ ДЕТАЛИ СРАВНЕНИЯ ДЛЯ ВЫБРАННОГО РАЗМЕРА ============
+  function updateViewingSizeDiffs() {
+    const db = window.GARMENTS_DB;
+    if (!db || !currentEvaluation || !activeRefGarment) return;
+
+    const res = currentEvaluation.results[activeLabViewingSize];
+    const pSize = db.product.sizes[activeLabViewingSize];
+    const rSize = activeRefGarment.sizes[activeRefSizeKey];
+
+    const sizeTitleEl = document.getElementById('lab-active-size-title');
+    if (sizeTitleEl) sizeTitleEl.textContent = activeLabViewingSize;
+
+    const legendProd = document.getElementById('lab-legend-prod');
+    if (legendProd) legendProd.textContent = `Aura Studio (${activeLabViewingSize})`;
+    const legendRef = document.getElementById('lab-legend-ref');
+    if (legendRef) legendRef.textContent = `${activeRefGarment.brand} (${activeRefSizeKey})`;
+
+    function formatDiff(field, pVal, rVal) {
+      if (res.delta[field] === null || res.delta[field] === undefined) return '—';
+      const d = res.delta[field];
+      const sign = d > 0 ? `+${d.toFixed(1)}` : `${d.toFixed(1)}`;
+      return `${sign} см (${pVal} vs ${rVal})`;
+    }
+
+    document.getElementById('lab-diff-chest').textContent = formatDiff('chest_half', pSize ? pSize.chest_half : '—', rSize ? rSize.chest_half : '—');
+    document.getElementById('lab-diff-len').textContent = formatDiff('length_back', pSize ? pSize.length_back : '—', rSize ? rSize.length_back : '—');
+    document.getElementById('lab-diff-sleeve').textContent = formatDiff('sleeve_cb', pSize ? pSize.sleeve_cb : '—', rSize ? rSize.sleeve_cb : '—');
+    document.getElementById('lab-diff-shoulder').textContent = formatDiff('shoulder', pSize ? pSize.shoulder : '—', rSize ? rSize.shoulder : '—');
+
+    const noteEl = document.getElementById('lab-note');
+    if (noteEl) {
+      noteEl.textContent = `Лекало Aura спроектировано в силуэте оверсайз со спущенным плечом (запас по груди +4 см). Плотность ткани 480 GSM сохраняет архитектурную драпировку.`;
+    }
+  }
+
+  // ============ ДИНАМИЧЕСКИЙ SVG НА ОСНОВЕ ЦИФР ============
+  function renderSvgOverlay() {
+    const svg = document.getElementById('lab-svg-element');
+    const db = window.GARMENTS_DB;
+    if (!svg || !db || !activeRefGarment) return;
+
+    const pSize = db.product.sizes[activeLabViewingSize];
+    const rSize = activeRefGarment.sizes[activeRefSizeKey];
+    if (!pSize || !rSize) return;
+
+    // Масштаб: 1 см = 2.4 px
+    // Центр по X = 110, горловина Y = 30
+    const cx = 110;
+    const topY = 30;
+
+    // Параметры для эталона (REF)
+    const rW = (rSize.chest_half || 58) * 2.4;
+    const rH = (rSize.length_back || 70) * 2.4;
+    const rLeft = cx - rW / 2;
+    const rRight = cx + rW / 2;
+    const rBottom = topY + rH;
+    const rSleeve = (rSize.sleeve_cb || 88) * 1.5; // визуальный скейл рукава для вписывания
+
+    // Параметры для товара (PRODUCT)
+    const pW = (pSize.chest_half || 62) * 2.4;
+    const pH = (pSize.length_back || 71) * 2.4;
+    const pLeft = cx - pW / 2;
+    const pRight = cx + pW / 2;
+    const pBottom = topY + pH;
+    const pSleeve = (pSize.sleeve_cb || 93.5) * 1.5;
+
+    // Построение контуров изделия
+    // Корпус: шея (30px) -> плечи -> подмышки -> низ
+    const refPath = `
+      M ${cx - 24} ${topY + 6}
+      Q ${cx} ${topY + 12} ${cx + 24} ${topY + 6}
+      L ${rRight - 8} ${topY + 45}
+      L ${rRight + 18} ${topY + 95}
+      L ${rRight + 4} ${topY + 104}
+      L ${rRight - 12} ${topY + 58}
+      L ${rRight - 12} ${rBottom}
+      L ${rLeft + 12} ${rBottom}
+      L ${rLeft + 12} ${topY + 58}
+      L ${rLeft - 4} ${topY + 104}
+      L ${rLeft - 18} ${topY + 95}
+      L ${rLeft + 8} ${topY + 45}
+      Z
+    `;
+
+    const prodPath = `
+      M ${cx - 26} ${topY + 4}
+      Q ${cx} ${topY + 12} ${cx + 26} ${topY + 4}
+      L ${pRight - 6} ${topY + 46}
+      L ${pRight + 22} ${topY + 98}
+      L ${pRight + 6} ${topY + 108}
+      L ${pRight - 10} ${topY + 60}
+      L ${pRight - 10} ${pBottom}
+      L ${pLeft + 10} ${pBottom}
+      L ${pLeft + 10} ${topY + 60}
+      L ${pLeft - 6} ${topY + 108}
+      L ${pLeft - 22} ${topY + 98}
+      L ${pLeft + 6} ${topY + 46}
+      Z
+    `;
+
+    svg.innerHTML = `
+      <!-- Эталон (пунктир) -->
+      <path d="${refPath}" fill="none" stroke="#a8a6a2" stroke-width="1.25" stroke-dasharray="3,3"/>
+      <!-- Наш товар (сплошной) -->
+      <path d="${prodPath}" fill="rgba(17,17,16,0.03)" stroke="#111110" stroke-width="1.75"/>
+      <!-- Маркер груди -->
+      <line x1="${pLeft}" y1="${topY + 65}" x2="${pRight}" y2="${topY + 65}" stroke="#2A5C43" stroke-width="1" stroke-dasharray="2,2"/>
+      <!-- Маркер длины спинки -->
+      <line x1="${cx}" y1="${rBottom}" x2="${cx}" y2="${pBottom}" stroke="#3142A5" stroke-width="1.5"/>
+    `;
+  }
+
+  // ============ ОБНОВЛЕНИЕ ВИДЖЕТА НА КАРТОЧКЕ ============
+  function updateCardFitWidget() {
+    const fitTitle = document.getElementById('fit-summary-text');
+    const fitDot = document.getElementById('fit-status-dot');
+    const fitThumb = document.getElementById('fit-scale-thumb');
+    const alertBox = document.getElementById('size-alert-box');
+    const alertText = document.getElementById('size-alert-text');
+    const subNote = document.getElementById('fit-sub-note');
+
+    if (!activeRefGarment || !currentEvaluation) {
+      if (fitTitle) fitTitle.textContent = 'Сравните с вещью, которая у вас есть';
+      if (fitDot) {
+        fitDot.className = 'dot dot--muted';
+      }
+      if (fitThumb) fitThumb.style.left = '50%';
+      if (subNote) subNote.innerHTML = 'Нажмите «Сравнить с моими вещами» для подбора размера по сантиметрам';
+      return;
+    }
+
+    const recSize = currentEvaluation.recommendedSize;
+    const isRecommended = currentSelectedSize === recSize;
+    const matchVal = currentEvaluation.results[currentSelectedSize] ? currentEvaluation.results[currentSelectedSize].match : currentEvaluation.match;
+    const refName = `${activeRefGarment.brand} ${activeRefGarment.model}`.replace(/\s*\([^)]*\)/, '');
+
+    // Выставляем точку и текст
+    if (isRecommended) {
+      if (fitDot) fitDot.className = 'dot dot--emerald';
+      if (currentEvaluation.isBetween) {
+        if (fitTitle) fitTitle.textContent = `Вам подойдёт ${currentEvaluation.label} · точность ${matchVal}%`;
+      } else {
+        if (fitTitle) fitTitle.textContent = `Вам подойдёт ${recSize} · совпадение ${matchVal}% · по вашему ${refName}`;
+      }
+      if (subNote) subNote.innerHTML = `<span class="mono">${matchVal}%</span> точность совпадения (оценка по обмерам изделия)`;
+      if (alertBox) alertBox.classList.add('is-hidden');
+    } else {
+      if (fitDot) fitDot.className = 'dot dot--muted';
+      if (fitTitle) fitTitle.textContent = `Выбран ${currentSelectedSize} · рекомендуем ${recSize}`;
+      if (alertBox && alertText) {
+        alertBox.classList.remove('is-hidden');
+        alertText.textContent = dynamicSizeHints[currentSelectedSize] || `Размер ${currentSelectedSize} будет заметно отличаться по посадке от вашего эталона.`;
+      }
+    }
+
+    // Шкала: позиция точки
+    // Оверсайз (+4 см по груди): 62% берут больше -> левее центра (34%)
+    if (fitThumb) {
+      if (currentSelectedSize === 'XS') fitThumb.style.left = '20%';
+      else if (currentSelectedSize === 'S') fitThumb.style.left = '34%';
+      else if (currentSelectedSize === 'M') fitThumb.style.left = '50%';
+      else if (currentSelectedSize === 'L') fitThumb.style.left = '66%';
+      else if (currentSelectedSize === 'XL') fitThumb.style.left = '80%';
+    }
+
+    // Подсветка кнопок размеров
+    ['XS', 'S', 'M', 'L', 'XL'].forEach(s => {
+      const b = document.getElementById(`size-btn-${s}`);
+      if (b) {
+        b.classList.toggle('is-recommended', s === recSize);
+        let dot = b.querySelector('.rec-dot');
+        if (s === recSize) {
+          if (!dot) {
+            dot = document.createElement('span');
+            dot.className = 'rec-dot';
+            b.appendChild(dot);
+          }
+        } else if (dot) {
+          dot.remove();
+        }
+      }
+    });
+  }
+
+  // ============ ОБНОВЛЕНИЕ ТАБА «ЛАБОРАТОРИЯ ПОСАДКИ» ============
+  function updateTabLabBlock() {
+    if (!activeRefGarment || !currentEvaluation) return;
+
+    const db = window.GARMENTS_DB;
+    const pSize = db.product.sizes[currentSelectedSize];
+    const rSize = activeRefGarment.sizes[activeRefSizeKey];
+    const res = currentEvaluation.results[currentSelectedSize];
+    if (!pSize || !rSize || !res) return;
+
+    const tabRefName = document.getElementById('tab-lab-ref-name');
+    if (tabRefName) tabRefName.textContent = `${activeRefGarment.brand} ${activeRefGarment.model} (${activeRefSizeKey})`;
+
+    const tabPill = document.getElementById('tab-lab-pill');
+    const recSizeEl = document.getElementById('tab-lab-rec-size');
+    if (recSizeEl) recSizeEl.textContent = currentEvaluation.recommendedSize;
+    if (tabPill) {
+      tabPill.innerHTML = `<span class="dot dot--emerald"></span>Aura <span class="mono">${currentEvaluation.recommendedSize}</span> — рекомендовано`;
+    }
+
+    function formatDelta(field, pV, rV) {
+      const d = res.delta[field];
+      if (d === null || d === undefined) return ['—', '—'];
+      const sign = d > 0 ? `+${d.toFixed(1)}` : `${d.toFixed(1)}`;
+      return [`${sign} см`, `${pV} vs ${rV}`];
+    }
+
+    const [dC, rC] = formatDelta('chest_half', pSize.chest_half, rSize.chest_half);
+    const [dL, rL] = formatDelta('length_back', pSize.length_back, rSize.length_back);
+    const [dS, rS] = formatDelta('sleeve_cb', pSize.sleeve_cb, rSize.sleeve_cb);
+
+    document.getElementById('tab-metric-chest').textContent = dC;
+    document.getElementById('tab-ref-chest').textContent = rC;
+    document.getElementById('tab-metric-len').textContent = dL;
+    document.getElementById('tab-ref-len').textContent = rL;
+    document.getElementById('tab-metric-sleeve').textContent = dS;
+    document.getElementById('tab-ref-sleeve').textContent = rS;
+
+    const accEl = document.getElementById('tab-lab-accuracy');
+    if (accEl) {
+      accEl.innerHTML = `Точность <span class="mono">${res.match}%</span> (оценка по обмерам)`;
+    }
+  }
+
+  // ============ КНОПКА «ВЫБРАТЬ РАЗМЕР И ЗАКРЫТЬ» ============
+  function applyLabSizeSelection() {
+    chooseSize(activeLabViewingSize);
+    closeModal('fit-lab');
+  }
+
+  function renderLabModal() {
+    renderWardrobeChips();
+    renderSelectedGarmentBar();
+    recalculateFit();
+  }
+
+  // ============ ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ ============
+  document.addEventListener('DOMContentLoaded', () => {
+    const db = window.GARMENTS_DB;
+
+    // Проверка placeholder для честности данных
+    if (db && db.product && db.product.confidence === 'placeholder') {
+      console.warn('AURA STUDIO Fit Warning: Данные собственного товара являются плейсхолдером (confidence: placeholder).');
+    }
+
+    setupGarmentSearch();
+
+    // Загрузка гардероба
+    const saved = loadWardrobeFromStorage();
+    if (saved.length > 0) {
+      const first = saved[0];
+      let g = first.customGarment;
+      if (!g && db && db.garments) {
+        g = db.garments.find(item => item.id === first.id);
+      }
+      if (g) {
+        selectGarmentModel(g, first.size);
+      }
+    } else if (db && db.garments && db.garments.length > 0) {
+      // Инициализируем Nike Club Fleece по умолчанию для быстрого старта
+      const defaultGarment = db.garments.find(g => g.id === 'nike-club-fleece-crew') || db.garments[0];
+      selectGarmentModel(defaultGarment, 'M');
+    }
+
+    renderWardrobeChips();
+    chooseSize('M');
+  });
+</script>
+</body>
+</html>
